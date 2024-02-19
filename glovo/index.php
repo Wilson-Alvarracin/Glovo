@@ -23,12 +23,12 @@
     }
 
     // Fetch all restaurants
-    $restaurants_query = "SELECT id_restaurante, rest_nom FROM tbl_restaurante";
+    $restaurants_query = "SELECT id_restaurante, rest_nom, rest_desc FROM tbl_restaurante";
     $restaurants_result = $conn->query($restaurants_query);
 
     if ($restaurants_result->num_rows > 0) {
         while ($restaurant = $restaurants_result->fetch_assoc()) {
-            echo "<p><a href='platos.php?restaurant_id={$restaurant['id_restaurante']}'>{$restaurant['rest_nom']}</a></p>";
+            echo "<p><a href='platos.php?restaurant_id={$restaurant['id_restaurante']}'>{$restaurant['rest_nom']}</a> - {$restaurant['rest_desc']}</p>";
         }
     } else {
         echo "<p>No restaurants available.</p>";
