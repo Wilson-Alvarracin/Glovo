@@ -5,10 +5,10 @@
 <h1> Bienvenidos a la página de comics </h1>
 
 <ul>
-    @foreach ($comic as $comics)
-        <li>{{$comics->id}}<a href="{{route('comics.show', $comics->id)}}"> {{$comics->titulo}}</a></li>
+    @foreach ($restaurante as $restaurantes)
+        <li>{{$restaurantes->id}}<a href="{{route('glovo.show', $restaurantes->id)}}"> {{$restaurantes->titulo}}</a></li>
     @endforeach
 </ul>
 
-{{$comic->links()}}
+{{$restaurantes->links()}}
 @endsection

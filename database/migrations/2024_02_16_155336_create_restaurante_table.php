@@ -4,29 +4,24 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRestauranteTable extends Migration
+class CreateRestaurantesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        Schema::create('restaurante', function (Blueprint $table) {
+        Schema::create('Restaurantes', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
+            $table->string('Nombre', 100);
+            $table->string('Imagen', 255);
+            $table->string('Direccion', 255);
+            $table->time('HorarioApertura');
+            $table->time('HorarioCierre');
+            $table->decimal('CalificacionPromedio', 3, 2);
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        Schema::dropIfExists('restaurante');
+        Schema::dropIfExists('Restaurantes');
     }
 }

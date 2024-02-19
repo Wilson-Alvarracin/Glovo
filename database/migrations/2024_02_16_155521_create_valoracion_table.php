@@ -4,28 +4,24 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateValoracionTable extends Migration
+class CreateValoracionesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        Schema::create('valoracion', function (Blueprint $table) {
+        Schema::create('Valoraciones', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('RestauranteID');
+            $table->foreign('RestauranteID')->references('ID')->on('Restaurantes');
+            $table->unsignedBigInteger('UsuarioID');
+            $table->foreign('UsuarioID')->references('ID')->on('Usuarios');
+            $table->integer('Calificacion');
+            $table->text('Comentario')->nullable();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        Schema::dropIfExists('valoracion');
+        Schema::dropIfExists('Valoraciones');
     }
 }

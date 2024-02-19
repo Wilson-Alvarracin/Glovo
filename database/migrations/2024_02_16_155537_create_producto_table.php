@@ -4,29 +4,24 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductoTable extends Migration
+class CreateProductosTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        Schema::create('producto', function (Blueprint $table) {
+        Schema::create('Productos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
+            $table->string('Nombre', 100);
+            $table->string('Imagen', 255);
+            $table->text('Descripcion');
+            $table->decimal('Precio', 8, 2);
+            $table->unsignedBigInteger('RestauranteID');
+            $table->foreign('RestauranteID')->references('ID')->on('Restaurantes');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        Schema::dropIfExists('producto');
+        Schema::dropIfExists('Productos');
     }
 }
