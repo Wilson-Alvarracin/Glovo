@@ -62,7 +62,7 @@ CREATE TABLE `tbl_platos` (
 
 LOCK TABLES `tbl_platos` WRITE;
 /*!40000 ALTER TABLE `tbl_platos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tbl_platos` ENABLE KEYS */;
+/*!40000 ALTER TABLE `tbl_platos` ENABLE KaEYS */;
 UNLOCK TABLES;
 
 --
@@ -128,7 +128,7 @@ DROP TABLE IF EXISTS `tbl_usr`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tbl_usr` (
-  `id_usr` int NOT NULL,
+  `id_usr` int NOT NULL AUTO_INCREMENT,
   `usr_nom` varchar(45) DEFAULT NULL,
   `usr_ape` varchar(45) DEFAULT NULL,
   `usr_email` varchar(45) DEFAULT NULL,

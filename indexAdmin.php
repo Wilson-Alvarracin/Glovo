@@ -81,53 +81,75 @@
                 <th>Nombre</th>
                 <th>Descripción</th>
                 <th>Gerente</th> <!-- Cambiado de ID Gerente a Gerente -->
+                <th>Tipo Comida</th>
                 <th>Acciones</th>
             </tr>
-            <?php
-            // Incluir el archivo de conexión PDO
-            require_once './proc/conexion.php';
+<?php
+// Incluir el archivo de conexión PDO
+require_once './proc/conexion.php';
 
-            try {
-                // Consulta SQL para obtener los restaurantes
-                $sql = "SELECT 
+// Consulta SQL para obtener todos los restaurantes
+$sql = "SELECT 
             r.id_restaurante,
             r.rest_nom,
             r.rest_desc,
-            u.usr_nom AS nombre_gerente 
+            u.usr_nom AS nombre_gerente,
+            c.cocina_nom AS tipo_cocina 
         FROM 
             tbl_restaurante r
         INNER JOIN 
-            tbl_usr u ON r.id_usr_gerente = u.id_usr";
+            tbl_usr u ON r.id_usr_gerente = u.id_usr
+        INNER JOIN 
+            tbl_restu_cocina rc ON r.id_restaurante = rc.id_restaurante
+        INNER JOIN 
+            tbl_cocinas c ON rc.tipo_cocina = c.id_cocina";
 
-                $stmt = $conn->prepare($sql);
-                $stmt->execute();
+$stmt = $conn->prepare($sql);
+$stmt->execute();
 
-                // Mostrar datos de cada restaurante
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    echo "<tr>";
-                    echo "<td>".$row["id_restaurante"]."</td>";
-                    echo "<td>".$row["rest_nom"]."</td>";
-                    echo "<td>".$row["rest_desc"]."</td>";
-                    echo "<td>".$row["nombre_gerente"]."</td>"; // Cambiado de ID Gerente a Gerente
-                    echo "<td>
-                            <a href='javascript:void(0);' onclick='editarRestaurante(".$row["id_restaurante"].")'>Editar</a> | 
-                            <a href='javascript:void(0);' onclick='eliminarRestaurante(".$row["id_restaurante"].")'>Eliminar</a>
-                        </td>";
-                    echo "</tr>";
-                }
-            } catch (PDOException $e) {
-                echo "Error: " . $e->getMessage();
-            }
-            ?>
+// Mostrar datos de todos los restaurantes
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    echo "<tr>";
+    echo "<td>".$row["id_restaurante"]."</td>";
+    echo "<td>".$row["rest_nom"]."</td>";
+    echo "<td>".$row["rest_desc"]."</td>";
+    echo "<td>".$row["nombre_gerente"]."</td>";
+    echo "<td>".$row["tipo_cocina"]."</td>"; // Mostrar el tipo de cocina
+    echo "<td>
+            <a href='javascript:void(0);' onclick='editarRestaurante(".$row["id_restaurante"].")'>Editar</a> | 
+            <a href='javascript:void(0);' onclick='eliminarRestaurante(".$row["id_restaurante"].")'>Eliminar</a>
+          </td>";
+    echo "</tr>";
+}
+?>
+
         </table>
     </div>
 
-    <!-- Contenido de Usuarios -->
-    <div id="usuarios" class="hidden">
-        <!-- Aquí va el contenido de Usuarios -->
-        <h2>Usuarios</h2>
-        <!-- Puedes agregar el CRUD de Usuarios aquí -->
-    </div>
+<!-- Contenido de Usuarios -->
+<div id="usuarios" class="hidden">
+    <!-- Aquí va el contenido de Usuarios -->
+    <h2>Usuarios</h2>
+    <!-- Botón para añadir un nuevo usuario -->
+    <button id="btnAgregarUsuario">Agregar Usuario</button>
+    <!-- Tabla para mostrar la lista de usuarios -->
+    <table id="tablaUsuarios">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Correo electrónico</th>
+                <th>Contraseña</th>
+                <th>Rol</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Aquí se mostrarán los usuarios -->
+        </tbody>
+    </table>
+</div>
 
     <!-- Contenido de Platos -->
     <div id="platos" class="hidden">
@@ -422,6 +444,136 @@ function editarRestaurante(id) {
             }
         });
     }
+
+
+
+    // ------------------------------------------------------- USUARIOS -------------------------------------
+$(document).ready(function () {
+    $('#btnAgregarUsuario').click(function () {
+        const roles = ['Admin', 'User', 'Gerente'];
+        let selectOptions = '';
+        roles.forEach(function(rol) {
+            selectOptions += `<option value="${rol}">${rol}</option>`;
+        });
+
+        Swal.fire({
+            title: 'Agregar Usuario',
+            html:
+                '<form id="formAgregarUsuario">' +
+                '<input id="nombreUsuario" class="swal2-input" placeholder="Nombre">' +
+                '<input id="apellidoUsuario" class="swal2-input" placeholder="Apellido">' +
+                '<input id="emailUsuario" class="swal2-input" placeholder="Correo electrónico">' +
+                '<input type="password" id="passwordUsuario" class="swal2-input" placeholder="Contraseña">' +
+                '<select id="rolUsuario" class="swal2-select">' +
+                selectOptions +
+                '</select>' +
+                '</form>',
+            showCancelButton: true,
+            confirmButtonText: 'Guardar',
+            cancelButtonText: 'Cancelar',
+            preConfirm: () => {
+                return {
+                    nombre: $('#nombreUsuario').val(),
+                    apellido: $('#apellidoUsuario').val(),
+                    email: $('#emailUsuario').val(),
+                    password: $('#passwordUsuario').val(),
+                    rol: $('#rolUsuario').val()
+                };
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: './proc/crear_usuario.php',
+                    type: 'POST',
+                    data: result.value,
+                    success: function(response) {
+                        console.log('Respuesta del servidor:', response);
+                        if (response.success) {
+                            Swal.fire('Error', response.message, 'error');
+                        } else {
+                            Swal.fire('Usuario creado correctamente', response.message, 'success');
+                            // Aquí puedes recargar la lista de usuarios o actualizarla con AJAX
+                                        // Llama a la función para cargar la lista de usuarios al cargar la página
+    cargarUsuarios();
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error en la solicitud AJAX:', error);
+                        Swal.fire('Error', 'Hubo un error al procesar la solicitud.', 'error');
+                    }
+                });
+            }
+        });
+
+        // Evitar que el formulario se envíe al presionar Enter
+        $('#formAgregarUsuario').submit(function(event) {
+            event.preventDefault();
+        });
+
+    });
+
+
+
+    // Función para cargar la lista de usuarios desde el servidor
+    function cargarUsuarios() {
+        $.ajax({
+            url: './proc/obtener_usuarios.php',
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                const tbody = $('#tablaUsuarios tbody');
+                tbody.empty();
+                data.forEach(function(usuario) {
+                    const tr = $('<tr>');
+                    tr.append($('<td>').text(usuario.id));
+                    tr.append($('<td>').text(usuario.nombre));
+                    tr.append($('<td>').text(usuario.apellido));
+                    tr.append($('<td>').text(usuario.email));
+                    tr.append($('<td>').text(usuario.password)); // Se agrega el campo de contraseña
+                    tr.append($('<td>').text(usuario.rol)); // Se agrega el campo de rol
+                    const acciones = $('<td>');
+                    acciones.append($('<button>').text('Editar').click(function() {
+                        // Aquí puedes mostrar SweetAlert con formulario para editar usuario
+                        // Puedes seguir una estructura similar a la función para agregar usuario
+                        Swal.fire('Editar Usuario', 'Aquí puedes mostrar formulario para editar usuario', 'info');
+                    }));
+                    acciones.append(' ');
+                    acciones.append($('<button>').text('Eliminar').click(function() {
+                        // Aquí puedes mostrar SweetAlert para confirmar eliminación del usuario
+                        Swal.fire({
+                            title: '¿Estás seguro?',
+                            text: 'Esta acción no se puede deshacer',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#d33',
+                            cancelButtonColor: '#3085d6',
+                            confirmButtonText: 'Sí, eliminar'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Aquí puedes enviar la solicitud para eliminar el usuario desde tu backend
+                                console.log('Eliminar usuario con ID:', usuario.id);
+                                // Luego puedes recargar la lista de usuarios o actualizarla con AJAX
+                            }
+                        });
+                    }));
+                    tr.append(acciones);
+                    tbody.append(tr);
+                });
+            },
+            error: function(xhr, status, error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Hubo un error al cargar la lista de usuarios.'
+                });
+            }
+        });
+    }
+
+    // Llama a la función para cargar la lista de usuarios al cargar la página
+    cargarUsuarios();
+});
+
 </script>
 
 </html>
