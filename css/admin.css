@@ -1,0 +1,46 @@
+        /* Estilo para ocultar los divs */
+        .hidden {
+            display: none;
+        }
+
+        /* Estilo para el encabezado */
+        header {
+            text-align: center;
+            background-color: #ffc244; /* Color de fondo */
+            padding: 20px 0; /* Espaciado interior */
+        }
+
+        /* Estilo para los botones del encabezado */
+        header button {
+            background-color: white; /* Color de fondo inicial */
+            color: #000; /* Color del texto */
+            border: 2px solid #000; /* Borde sólido */
+            padding: 10px 20px; /* Espaciado interior */
+            margin: 0 10px; /* Margen entre botones */
+            cursor: pointer;
+        }
+
+        /* Estilo para los botones del encabezado cuando están activos */
+        header button:active {
+            background-color: green; /* Color de fondo cuando se pulsa */
+        }
+
+        /* Estilo para las tablas */
+        table {
+            margin: 0 auto; /* Centrar la tabla */
+            border-collapse: collapse; /* Colapso de borde de tabla */
+            width: 80%; /* Ancho de la tabla */
+        }
+
+        /* Estilo para las celdas de la tabla */
+        th, td {
+            border: 1px solid #000; /* Borde sólido */
+            padding: 8px; /* Espaciado interior */
+            text-align: left; /* Alineación del texto */
+        }
+
+        /* Estilo para las celdas de encabezado de la tabla */
+        th {
+            background-color: #ffc244; /* Color de fondo */
+            color: white; /* Color del texto */
+        }
