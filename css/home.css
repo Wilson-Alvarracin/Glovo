@@ -81,6 +81,7 @@ svg {
     font-size: 58px;
     font-weight: 700;
     line-height: 1.07;
+    text-align: center;
     /* font-size: 54px; */
 }
 
@@ -103,7 +104,7 @@ svg {
     top: 0;
     z-index: 1000;
     transition: box-shadow 0.3s ease;
-    padding: 20px;
+    padding: 10px 260px 10px;
     /* Agregamos una transición suave para el cambio de sombra */
 }
 
@@ -208,7 +209,7 @@ svg {
     transition: box-shadow 0.3s ease-in-out;
     margin: 20px;
     width: 26rem;
-    height: 340px;
+    height: 22rem;
     text-align: center; /* Centra el contenido dentro del contenedor */
 }
 
