@@ -49,6 +49,87 @@
             </div>
         </div>
     </div>
+    <div id="restaurantes" class="slt">
+    <div class="column-4 flex">
+            <div class="card">
+                <img src="./../resorces/img/mc.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Mc Donal</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        <div class="column-4 flex">
+            <div class="card">
+                <img src="./../resorces/img/sushisom.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h3 class="card-title">SushiSom</h3>
+                    <label for="">valoracion: 4,5/5</label>
+                    <p class="card-text">La Farga, Hospitalet de Llobregat</p>
+                </div>
+            </div>
+        </div>
+        <div class="column-4 flex">
+            <div class="card">
+                <img src="./../resorces/img/sushisom.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h3 class="card-title">SushiSom</h3>
+                    <label for="">valoracion: 4,5/5</label>
+                    <p class="card-text">La Farga, Hospitalet de Llobregat</p>
+                </div>
+            </div>
+        </div>
+        <div class="column-4 flex">
+            <div class="card">
+                <img src="./../resorces/img/sushisom.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h3 class="card-title">SushiSom</h3>
+                    <label for="">valoracion: 4,5/5</label>
+                    <p class="card-text">La Farga, Hospitalet de Llobregat</p>
+                </div>
+            </div>
+        </div>
+        <div class="column-4 flex">
+            <div class="card">
+                <img src="./../resorces/img/mc.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Mc Donal</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        <div class="column-4 flex">
+            <div class="card">
+                <img src="./../resorces/img/sushisom.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h3 class="card-title">SushiSom</h3>
+                    <label for="">valoracion: 4,5/5</label>
+                    <p class="card-text">La Farga, Hospitalet de Llobregat</p>
+                </div>
+            </div>
+        </div>
+        <div class="column-4 flex">
+            <div class="card">
+                <img src="./../resorces/img/sushisom.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h3 class="card-title">SushiSom</h3>
+                    <label for="">valoracion: 4,5/5</label>
+                    <p class="card-text">La Farga, Hospitalet de Llobregat</p>
+                </div>
+            </div>
+        </div>
+        <div class="column-4 flex">
+            <div class="card">
+                <img src="./../resorces/img/sushisom.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h3 class="card-title">SushiSom</h3>
+                    <label for="">valoracion: 4,5/5</label>
+                    <p class="card-text">La Farga, Hospitalet de Llobregat</p>
+                </div>
+            </div>
+        </div>
     <script src="./../js/script.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
