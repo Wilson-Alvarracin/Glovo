@@ -117,11 +117,27 @@ svg {
 
 .scrolled {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: margin-top 0.3s ease;
+}
+
+.header-transition {
+    transition: opacity 0.3s ease;
+    /* Transición de opacidad durante 0.3 segundos con un efecto ease */
 }
 
 .input-restaurante {
-    transition: width 0.3s ease;
     margin-top: 20px;
+}
+
+.bottom-input {
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 30px;
+}
+
+.green {
+    background-color: #00A082FF;
+    color: white;
 }
 
 .btn-custom {

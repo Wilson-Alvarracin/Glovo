@@ -6,6 +6,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="./../css/home.css">
     <title>Document</title>
 </head>
@@ -42,16 +43,18 @@
     </div>
     <div id="section-2" class="flex">
         <div class="column-1 flex">
-            <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1"></span>
-                <input id='input' type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+            <div class="input-group mb-3 bottom-input">
+                <span class="input-group-text green" id="basic-addon1"><i class="bi bi-search"></i></span>
+                <input id='bottomInput' type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
             </div>
         </div>
     </div>
-    <p style='font-size: 72px;'>TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO </p>
     <script src="./../js/script.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+
+        const headerInput = document.getElementById('headerInput');
+
         // Guardar el contenido original del encabezado incluyendo su HTML
         const originalHeaderHTML = document.getElementById('navBar').innerHTML;
         var valor = document.getElementById('input');
@@ -61,10 +64,20 @@
             const scrollPosition = window.scrollY;
             const header = document.getElementById('navBar');
 
+            let inputValue = '';
+            // Evento para detectar cambios en el input
+            header.addEventListener('input', function(event) {
+                inputValue = event.target.value;
+            });
+
             if (scrollPosition > 600 ) {
                 if (!header.classList.contains('input-restaurante')) {
                     header.classList.add('input-restaurante'); // Agregamos la clase del input
-                    header.innerHTML = originalHeaderHTML + '<input type="text" class="form-control input-restaurante" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">' ;
+                    header.innerHTML = originalHeaderHTML + `
+                        <div class="input-group mb-3 bottom-input">
+                            <span class="input-group-text green" id="basic-addon1"><i class="bi bi-search"></i></span>
+                            <input id='bottomInput' type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                        </div>`;
                 }
             } else if (scrollPosition > 0) {
                 if (!header.classList.contains('scrolled')) {
