@@ -4,11 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Valoraciones extends Migration
+class CreateValoracionesTable extends Migration
 {
     public function up()
     {
-        Schema::create('Valoraciones', function (Blueprint $table) {
+        Schema::create('tbl_valoraciones', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('RestauranteID');
             $table->foreign('RestauranteID')->references('ID')->on('Restaurantes');

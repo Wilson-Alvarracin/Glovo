@@ -75,11 +75,18 @@
         <button type="button" id="btn_valoracion">Enviar Valoración</button>
     </form>
 
+    <br>
+    <br>
+
+    <h2>Comentarios</h2>
+    <div id="comentarios_all"></div>
+
 
     <a href="index.php">Volver a la página anterior</a>
 </body>
 
 <script src="./ajax.js"></script>
 <script src="./valoracion.js"></script>
+<script src="./mostrar_comentarios.js"></script>
 
 </html>

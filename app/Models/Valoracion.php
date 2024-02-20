@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Valoracion extends Model
 {
-    protected $table = 'Valoraciones';
+    // protected $table = 'Valoraciones';
 
     public function restaurante()
     {

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Platos extends Model
 {
-    protected $table = 'Productos';
+    // protected $table = 'Productos';
 
     public function restaurante()
     {

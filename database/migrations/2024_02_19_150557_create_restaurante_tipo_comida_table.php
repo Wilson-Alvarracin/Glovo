@@ -4,11 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class RestauranteTipoCocina extends Migration
+class CreateRestauranteTipoCocinaTable extends Migration
 {
     public function up()
     {
-        Schema::create('Restaurante_Tipo_Cocina', function (Blueprint $table) {
+        Schema::create('tbl_restaurante_tipo_cocina', function (Blueprint $table) {
             $table->unsignedBigInteger('RestauranteID');
             $table->foreign('RestauranteID')->references('ID')->on('Restaurantes');
             $table->unsignedBigInteger('TipoCocinaID');

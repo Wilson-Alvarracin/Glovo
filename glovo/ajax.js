@@ -6,7 +6,7 @@ function fetchRestaurantInfo() {
 
     // Make an AJAX request to your PHP script
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'restaurant.php?restaurant_id=' + inputID, true);
+    xhr.open('GET', 'mostrar_platos.php?restaurant_id=' + inputID, true);
 
     // Set up the callback function to handle the response
     xhr.onload = function () {

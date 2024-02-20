@@ -26,6 +26,9 @@ function insertarValoracion() {
                     title: 'Éxito',
                     text: response.message,
                 });
+
+                document.getElementById('valoracion').value = '';
+                document.getElementById('comentario').value = '';
             } else {
                 // Mostrar SweetAlert de error
                 Swal.fire({
@@ -33,6 +36,9 @@ function insertarValoracion() {
                     title: 'Error',
                     text: response.message,
                 });
+
+                document.getElementById('valoracion').value = '';
+                document.getElementById('comentario').value = '';
             }
         } else {
             console.error('Error al insertar la valoración. Estado: ' + xhr.status);

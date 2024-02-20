@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cocinas extends Model
 {
-    protected $table = 'Tipo_Cocina';
+    // protected $table = 'Tipo_Cocina';
 
     public function restaurantes()
     {

@@ -4,11 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Restaurantes extends Migration
+class CreateRestaurantesTable extends Migration
 {
     public function up()
     {
-        Schema::create('Restaurantes', function (Blueprint $table) {
+        Schema::create('tbl_restaurantes', function (Blueprint $table) {
             $table->id();
             $table->string('Nombre', 100);
             $table->string('Imagen', 255);
