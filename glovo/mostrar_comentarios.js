@@ -9,22 +9,15 @@ document.addEventListener("DOMContentLoaded", function () {
             if (xhr.readyState == 4) {
                 if (xhr.status == 200) {
                     // Parsear la respuesta JSON
-                    var comments = JSON.parse(xhr.responseText);
+                    var response = JSON.parse(xhr.responseText);
 
-                    // Mostrar los comentarios en el div con id 'comentarios_all'
+                    // Mostrar la tabla en el div con id 'comentarios_all'
                     var commentsDiv = document.getElementById('comentarios_all');
-                    commentsDiv.innerHTML = ''; // Limpiar contenido anterior
+                    commentsDiv.innerHTML = response.contenido || '';
 
-                    // Verificar si hay comentarios
-                    if (Array.isArray(comments) && comments.length > 0) {
-                        comments.forEach(function (comment) {
-                            var commentItem = document.createElement('div');
-                            commentItem.innerHTML = '<strong>' + comment.user + ':</strong> ' + comment.comment + ' - estrellas = ' + comment.valoracion;
-                            commentsDiv.appendChild(commentItem);
-                        });
-                    } else {
-                        // No hay comentarios
-                        commentsDiv.innerHTML = '<p>No hay comentarios para este restaurante.</p>';
+                    // Si hay un mensaje, mostrarlo
+                    if (response.message) {
+                        commentsDiv.innerHTML += '<p>' + response.message + '</p>';
                     }
                 } else {
                     // Mostrar el error en el div 'comentarios_all'

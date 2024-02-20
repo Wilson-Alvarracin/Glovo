@@ -17,7 +17,7 @@ $restauranteID = isset($_POST['restaurante_id']) ? $_POST['restaurante_id'] : 0;
 $id_usr = isset($_POST['id_usr']) ? $_POST['id_usr'] : 0;
 
 // Validar y realizar la inserción en la base de datos
-if ($valoracion >= 1 && $valoracion <= 5 && $restauranteID > 0 && $id_usr > 0) {
+if ($valoracion >= 1 && $valoracion <= 5 && $restauranteID > 0 && $id_usr > 0 && $comentario != '') {
     // Verificar si el usuario ya ha realizado una valoración para este restaurante
     $check_query = "SELECT COUNT(*) as count FROM tbl_valoracion WHERE id_usr = ? AND id_rest = ?";
     $check_stmt = $conn->prepare($check_query);

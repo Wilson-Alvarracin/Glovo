@@ -54,7 +54,8 @@
     <?php
     $restaurant_id = isset($_GET['restaurant_id']) ? $_GET['restaurant_id'] : 0;
     echo "<input type='hidden' id='id_restaurante' value='" . $restaurant_id . "'>";
-    $id_user = 9;
+    $id_user = 10;
+    $_SESSION['id_user'] = $id_user;
 
     ?>
     <div id="platos"></div>
@@ -88,5 +89,6 @@
 <script src="./ajax.js"></script>
 <script src="./valoracion.js"></script>
 <script src="./mostrar_comentarios.js"></script>
+<script src="./borrar_valoracion.js"></script>
 
 </html>
