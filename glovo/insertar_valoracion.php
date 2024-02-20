@@ -11,7 +11,7 @@ if ($conn->connect_error) {
 }
 
 // Obtener datos de la solicitud POST
-$valoracion = isset($_POST['valoracion']) ? $_POST['valoracion'] : 0;
+$valoracion = isset($_POST['valoracion']) ? str_replace(',', '.', $_POST['valoracion']) : 0;
 $comentario = isset($_POST['comentario']) ? $_POST['comentario'] : '';
 $restauranteID = isset($_POST['restaurante_id']) ? $_POST['restaurante_id'] : 0;
 $id_usr = isset($_POST['id_usr']) ? $_POST['id_usr'] : 0;
@@ -44,7 +44,7 @@ if ($valoracion >= 1 && $valoracion <= 5 && $restauranteID > 0 && $id_usr > 0 &&
 
     if ($insert_stmt) {
         // Vincular parámetros
-        $insert_stmt->bind_param('iisi', $restauranteID, $valoracion, $comentario, $id_usr);
+        $insert_stmt->bind_param('idsi', $restauranteID, $valoracion, $comentario, $id_usr);
 
         // Ejecutar la consulta
         if ($insert_stmt->execute()) {

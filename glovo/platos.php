@@ -47,14 +47,17 @@
             text-decoration: underline;
         }
     </style>
-     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 </head>
 
 <body>
     <?php
     $restaurant_id = isset($_GET['restaurant_id']) ? $_GET['restaurant_id'] : 0;
     echo "<input type='hidden' id='id_restaurante' value='" . $restaurant_id . "'>";
-    $id_user = 10;
+    $id_user = 11;
     $_SESSION['id_user'] = $id_user;
 
     ?>
@@ -63,14 +66,17 @@
     <!-- Formulario para insertar valoraciones -->
     <form id="valoracionForm">
         <label for="valoracion">Valoración:</label>
-        <input type="number" id="valoracion" name="valoracion" min="1" max="5" required>
+        <div id="rateYo"></div>
+        <div class="counter"></div>
+        <input type="number" id="valoracion" name="valoracion" min="1" max="5">
+        <!-- <span id="valoracion"></span> -->
 
         <label for="comentario">Comentario:</label>
-        <textarea id="comentario" name="comentario" required></textarea>
+        <textarea id="comentario" name="comentario"></textarea>
 
         <!-- Añade un campo oculto para almacenar el id_usr -->
         <?php
-        echo "<input type='hidden' id='id_usr' name='id_usr' value='".$id_user."'>" 
+        echo "<input type='hidden' id='id_usr' name='id_usr' value='" . $id_user . "'>"
         ?>
 
         <button type="button" id="btn_valoracion">Enviar Valoración</button>
@@ -82,13 +88,36 @@
     <h2>Comentarios</h2>
     <div id="comentarios_all"></div>
 
+    <h2>Media Estrellas</h2>
+    <p id="media_valoracion"></p>
+
 
     <a href="index.php">Volver a la página anterior</a>
 </body>
+<script>
+    $(function() {
 
+        $("#rateYo").rateYo({
+
+            rating: 0,
+            halfStar: true,
+            spacing: "5px",
+            multiColor: {
+                "startColor": "#FF0000", //RED
+                "endColor": "#00FF00" //GREEN
+            },
+            onChange: function (rating, rateYoInstance) {
+                $("#valoracion").val(rating);
+            }
+            
+        });
+
+    });
+</script>
 <script src="./ajax.js"></script>
 <script src="./valoracion.js"></script>
 <script src="./mostrar_comentarios.js"></script>
 <script src="./borrar_valoracion.js"></script>
+<script src="./calcular_avg.js"></script>
 
 </html>

@@ -15,13 +15,15 @@ function fetchRestaurantInfo() {
             var response = JSON.parse(xhr.responseText);
 
             // Display the restaurant name
-            platosDiv.innerHTML = "<h1>" + response.restaurant_name + " Platos</h1>";
+            platosDiv.innerHTML = "<h1>" + response.restaurant_name + "</h1>";
+
+            platosDiv.innerHTML += "<p>" + response.restaurant_description + "</p>";
 
             // Display the products
             if (response.products.length > 0) {
                 platosDiv.innerHTML += "<ul>";
                 response.products.forEach(function (product) {
-                    platosDiv.innerHTML += "<li>" + product.plato_descripcion + " - Price: " + product.plato_precio + "</li>";
+                    platosDiv.innerHTML += "<li>" + product.plato_descripcion + " - Precio: " + product.plato_precio + "€</li>";
                 });
                 platosDiv.innerHTML += "</ul>";
             } else {

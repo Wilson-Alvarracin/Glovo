@@ -42,7 +42,7 @@ if ($result) {
                 // $contenido .= ' | <button onclick="borrarValoracion(' . $row['user_id'] . ')">Borrar</button>';
             // }
             $contenido .= '</p>';
-            // $contenido .= "<button onclick='borrarValoracion(" . $row['id_usr'] . ")'>Borrar</button>";
+            // $contenido .= '<button onclick=borrarValoracion('.$row['id_usr'].')>Borrar</button>';
             $contenido .= '<br>';
         }
 
