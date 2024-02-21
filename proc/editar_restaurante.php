@@ -4,6 +4,7 @@ $id = $_POST['id'];
 $nombre = $_POST['nombre'];
 $descripcion = $_POST['descripcion'];
 $idGerente = $_POST['idGerente'];
+$idCocina = $_POST['idCocina']; // Nuevo campo para el ID del tipo de cocina
 
 // Incluir el archivo de conexión PDO
 require_once 'conexion.php';
@@ -30,6 +31,13 @@ try {
         $stmt->bindParam(':idGerente', $idGerente);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
+
+        // Actualizar la relación entre el restaurante y el tipo de cocina
+        $sql_update_cocina = "UPDATE tbl_restu_cocina SET tipo_cocina = :idCocina WHERE id_restaurante = :id";
+        $stmt_update_cocina = $conn->prepare($sql_update_cocina);
+        $stmt_update_cocina->bindParam(':idCocina', $idCocina);
+        $stmt_update_cocina->bindParam(':id', $id);
+        $stmt_update_cocina->execute();
 
         // Verificar si se realizó la actualización correctamente
         $rowCount = $stmt->rowCount();

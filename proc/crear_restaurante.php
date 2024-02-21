@@ -8,6 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombre = $_POST['nombre'];
     $descripcion = $_POST['descripcion'];
     $idGerente = $_POST['idGerente'];
+    $idCocina = $_POST['idCocina']; // Agregar el parámetro para la ID de la cocina
 
     try {
         // Verificar si ya existe un restaurante con el mismo nombre
@@ -36,7 +37,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Verificar si se realizó la inserción correctamente
         if ($stmt->rowCount() > 0) {
-            // Si la inserción fue exitosa, devuelve un mensaje de éxito
+            // Si la inserción fue exitosa, obtén el ID del restaurante insertado
+            $lastInsertedId = $conn->lastInsertId();
+
+            // Insertar la relación entre el restaurante y la cocina seleccionada
+            $sqlRelacion = "INSERT INTO tbl_restu_cocina (id_restaurante, tipo_cocina) VALUES (:idRestaurante, :idCocina)";
+            $stmtRelacion = $conn->prepare($sqlRelacion);
+            $stmtRelacion->bindParam(':idRestaurante', $lastInsertedId);
+            $stmtRelacion->bindParam(':idCocina', $idCocina);
+            $stmtRelacion->execute();
+
+            // Devuelve un mensaje de éxito si la inserción fue exitosa
             echo json_encode(array("success" => true, "message" => "Restaurante creado correctamente."));
             exit();
         } else {
