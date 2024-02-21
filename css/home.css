@@ -97,7 +97,9 @@ svg {
     width: 100%;
 }
 /* ---------BARRA-DE-NAVEGACION------- */
-
+span#basic-addon1{
+    border: 0;
+}
 .navbar {
     background-color: rgb(255, 194, 68);
     position: sticky;
@@ -154,6 +156,36 @@ svg {
 }
 
 
+/*--------FILTROS-PAGINA-PRINCIPAL-------- */
+
+#buscador{
+    width: 65rem;
+    padding: 20px;
+    /* height: 5çrem; */
+    background-color:#ffc244;
+    border-radius: 10px;
+    /* border: 2px #000 solid; */
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+
+}
+
+
+/*-----LABELS DE LAS TARJETAS PRINCIPALES---*/
+.label {
+    display: inline-block;
+    padding: 4px;
+    margin: 0px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: #00A082;
+    color: white; /* Color de texto negro */
+}
+
+.label-name {
+    margin-right: 8px;
+}
+
 /* ----------ESTILOS FORMULARIO-----------*/
 
 .margen {
@@ -201,7 +233,6 @@ svg {
 .card-title{
 
     text-align: left;
-    margin-bottom: 15px;
 }
 .card{
     overflow: hidden;
@@ -209,7 +240,7 @@ svg {
     transition: box-shadow 0.3s ease-in-out;
     margin: 20px;
     width: 26rem;
-    height: 22rem;
+    height: 25rem;
     text-align: center; /* Centra el contenido dentro del contenedor */
 }
 
@@ -219,6 +250,3 @@ svg {
     text-align: left;
     font-size: 12px;
 }
-
-
-/* Opcional: Ajustar el tamaño del contenedor si es necesario */

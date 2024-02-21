@@ -7,6 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <link rel="stylesheet" href="./../css/home.css">
     <title>Document</title>
 </head>
@@ -20,6 +21,7 @@
         <button id="headerInput" class="btn btn-custom" type="submit"><span class="spn-nav">Iniciar Sesion</span></button>
     </div>
 </nav>
+
 <!-- Fin del NavBar -->
     <div id="section-1" class="slt flex">
         <div class="column-2 flex">
@@ -38,99 +40,56 @@
             </div>
         </div>
     </div>
-    <div id="int-1">
+
+    <div id="int-1" class="margen">
         <img src="https://glovoapp.com/images/waves/address-jumbotron-wave-desktop.svg" alt="" srcset="">
     </div>
-    <div id="section-2" class="flex">
-        <div class="column-1 flex">
-            <div class="input-group mb-3 bottom-input">
-                <span class="input-group-text green" id="basic-addon1"><i class="bi bi-search"></i></span>
-                <input id='bottomInput' type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+    <!-- BUSCADOR CON FILTROS -->
+    <div id="section-2" class="slt column-1 flex">
+        <div id="buscador" class="">
+            <div class="column-2">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                </div>
+            </div>
+            <div class="column-4">
+            <select class="form-select form-select-sm" aria-label="Default select example">
+                <option selected>Tipo de Cocina</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+            </div>
+            <div class="column-4">
+            <select class="form-select form-select-sm" aria-label="Default select example">
+                <option selected>Precio medio</option>
+                <option value="1">€€€ Mas de 20€</option>
+                <option value="2">€€ Entre 10€ a 20€</option>
+                <option value="3">€ Menos de 10€</option>
+            </select>
             </div>
         </div>
     </div>
-    <div id="restaurantes" class="slt">
-                <div class="column-4 flex">
-            <div class="card">
-                <img src="./../resorces/img/mc.png" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Mc Donal</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-        <div class="column-4 flex">
-            <div class="card">
-                <img src="./../resorces/img/sushisom.png" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h3 class="card-title">SushiSom</h3>
-                    <label for="">valoracion: 4,5/5</label>
-                    <p class="card-text">La Farga, Hospitalet de Llobregat</p>
-                </div>
-            </div>
-        </div>
-        <div class="column-4 flex">
-            <div class="card">
-                <img src="./../resorces/img/sushisom.png" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h3 class="card-title">SushiSom</h3>
-                    <label for="">valoracion: 4,5/5</label>
-                    <p class="card-text">La Farga, Hospitalet de Llobregat</p>
-                </div>
-            </div>
-        </div>
-        <div class="column-4 flex">
-            <div class="card">
-                <img src="./../resorces/img/sushisom.png" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h3 class="card-title">SushiSom</h3>
-                    <label for="">valoracion: 4,5/5</label>
-                    <p class="card-text">La Farga, Hospitalet de Llobregat</p>
-                </div>
-            </div>
-        </div>
-        <div class="column-4 flex">
-            <div class="card">
-                <img src="./../resorces/img/mc.png" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Mc Donal</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-        <div class="column-4 flex">
-            <div class="card">
-                <img src="./../resorces/img/sushisom.png" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h3 class="card-title">SushiSom</h3>
-                    <label for="">valoracion: 4,5/5</label>
-                    <p class="card-text">La Farga, Hospitalet de Llobregat</p>
-                </div>
-            </div>
-        </div>
-        <div class="column-4 flex">
-            <div class="card">
-                <img src="./../resorces/img/sushisom.png" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h3 class="card-title">SushiSom</h3>
-                    <label for="">valoracion: 4,5/5</label>
-                    <p class="card-text">La Farga, Hospitalet de Llobregat</p>
-                </div>
-            </div>
-        </div>
-        <div class="column-4 flex">
-            <div class="card">
-                <img src="./../resorces/img/sushisom.png" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h3 class="card-title">SushiSom</h3>
-                    <label for="">valoracion: 4,5/5</label>
-                    <p class="card-text">La Farga, Hospitalet de Llobregat</p>
-                </div>
-            </div>
-        </div>
-    <script src="./../js/script.js"></script>
 
+    <div id="restaurantes" class="slt">
+        <div class="column-4 flex">
+            <div class="card">
+                <a href="./view.php">
+                    <img src="./../resorces/img/sushisom.png" class="card-img-top" alt="...">
+                </a>
+                <div class="card-body">
+                    <h3 class="card-title">SushiSom</h3>
+                    <div class="label">
+                        <span class="label-name flex"><box-icon name='restaurant'></box-icon></box-icon>Asiática</span>
+                    </div>
+                    <div class="label">
+                        <span class="label-name flex"><box-icon name='leaf' rotate='270' color='#00d40f'></box-icon>bug</span>
+                    </div>
+                    <P>valoracion: 4,5/5</P>
+                    <p class="card-text">La Farga, Hospitalet de Llobregat</p>
+                </div>
+            </div>
+        </div>
+<!-- <script src="./../js/script.js"></script> -->
 </body>
 </html>
