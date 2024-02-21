@@ -23,25 +23,24 @@
 <body>
     <!-- Contenido de Restaurantes -->
     <div id="restaurantes" class="hidden">
-        <!-- Botón para añadir restaurante -->
-        <button onclick="mostrarFormulario()">Añadir Restaurante</button>
-        
         <!-- CRUD de Restaurantes -->
         <h2>Restaurantes</h2>
+                <!-- Botón para añadir restaurante -->
+                <button onclick="mostrarFormulario()">Añadir Restaurante</button>   
         <table>
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Descripción</th>
-                <th>Gerente</th> <!-- Cambiado de ID Gerente a Gerente -->
+                <th>Gerente</th>
                 <th>Tipo Comida</th>
                 <th>Acciones</th>
             </tr>
-<?php
+            <?php
 // Incluir el archivo de conexión PDO
 require_once './proc/conexion.php';
 
-// Consulta SQL para obtener todos los restaurantes
+// Consulta SQL para obtener todos los restaurantes con su tipo de cocina
 $sql = "SELECT 
             r.id_restaurante,
             r.rest_nom,
@@ -76,6 +75,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 }
 ?>
 
+
         </table>
     </div>
 
@@ -83,9 +83,31 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 <div id="usuarios" class="hidden">
     <!-- Aquí va el contenido de Usuarios -->
     <h2>Usuarios</h2>
-    <!-- Botón para añadir un nuevo usuario -->
-    <button id="btnAgregarUsuario">Agregar Usuario</button>
+    <!-- Barra de filtro -->
+
+        <!-- Botón para añadir un nuevo usuario -->
+        <button id="btnAgregarUsuario">Agregar Usuario</button>
     <!-- Tabla para mostrar la lista de usuarios -->
+
+
+    <div>
+        <label for="filtroNombre">Filtrar por Nombre:</label>
+        <input type="text" id="filtroNombre" />
+
+        <label for="filtroCorreo">Filtrar por Correo:</label>
+        <input type="text" id="filtroCorreo" />
+
+        
+        <label for="filtroRol">Filtrar por Rol:</label>
+        <select id="filtroRol">
+            <option value="">Todos</option>
+            <option value="admin">Admin</option>
+            <option value="user">User</option>
+            <option value="gerente">Gerente</option>
+        </select>
+        <br>
+
+    </div>
     <table id="tablaUsuarios">
         <thead>
             <tr>
@@ -104,6 +126,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     </table>
 </div>
 
+
 <!-- Contenido de Platos -->
 <div id="platos" class="hidden">
     <!-- Aquí va el contenido de Platos -->
@@ -115,7 +138,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Nombre</th>
+                <th>Plato</th>
                 <th>Precio</th>
                 <th>Restaurante</th>
                 <th>Acciones</th>
