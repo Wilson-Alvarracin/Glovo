@@ -2,6 +2,14 @@
 var btnValoracion = document.getElementById('btn_valoracion');
 btnValoracion.onclick = insertarValoracion;
 
+var formularioVisible = false;
+
+document.getElementById('mostrarFormulario').onclick = function () {
+    var formulario = document.getElementById('valoracionForm');
+    formulario.style.display = formularioVisible ? 'none' : 'block';
+    formularioVisible = !formularioVisible;
+};
+
 function insertarValoracion() {
     var valoracion = document.getElementById('valoracion').value;
     var comentario = document.getElementById('comentario').value;

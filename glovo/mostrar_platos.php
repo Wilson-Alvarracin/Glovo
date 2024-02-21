@@ -40,7 +40,8 @@ if ($product_result) { // Check if the query was successful
         while ($product = $product_result->fetch_assoc()) {
             $output['products'][] = [
                 'plato_descripcion' => $product['plato_descripcion'],
-                'plato_precio' => $product['plato_precio']
+                'plato_precio' => $product['plato_precio'],
+                'plato_imagen' => $product['plato_imagen'],
             ];
         }
     } else {

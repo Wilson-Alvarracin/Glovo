@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     // Mostrar la media de valoración al lado del restaurante
                     var mediaDiv = document.getElementById('media_valoracion');
-                    mediaDiv.innerHTML = 'Media de Valoración: ' + response.media_valoracion;
+                    mediaDiv.innerHTML = 'Media de Valoración: ' + response.media_valoracion + '/5';
                 } else {
                     // Mostrar el error en el div 'comentarios_all'
                     var commentsDiv = document.getElementById('comentarios_all');

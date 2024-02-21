@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `tbl_cocinas` (
 
 -- Crear tabla `tbl_usr`
 CREATE TABLE IF NOT EXISTS `tbl_usr` (
-  `id_usr` int NOT NULL,
+  `id_usr` int NOT NULL AUTO_INCREMENT,
   `usr_nom` varchar(45) DEFAULT NULL,
   `usr_ape` varchar(45) DEFAULT NULL,
   `usr_email` varchar(45) DEFAULT NULL,
@@ -20,12 +20,15 @@ CREATE TABLE IF NOT EXISTS `tbl_usr` (
   PRIMARY KEY (`id_usr`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
+
 -- Crear tabla `tbl_restaurante`
 CREATE TABLE IF NOT EXISTS `tbl_restaurante` (
   `id_restaurante` int NOT NULL AUTO_INCREMENT,
   `rest_nom` varchar(45) DEFAULT NULL,
   `rest_desc` varchar(45) DEFAULT NULL,
   `id_usr_gerente` int NOT NULL,
+  `rest_header` varchar(255) DEFAULT NULL,
+  `rest_logo` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_restaurante`),
   KEY `fk_tbl_restaurante_tbl_usr1_idx` (`id_usr_gerente`),
   CONSTRAINT `fk_tbl_restaurante_tbl_usr1` FOREIGN KEY (`id_usr_gerente`) REFERENCES `tbl_usr` (`id_usr`)
@@ -37,10 +40,12 @@ CREATE TABLE IF NOT EXISTS `tbl_platos` (
   `plato_precio` int DEFAULT NULL,
   `plato_descripcion` varchar(45) DEFAULT NULL,
   `id_restaurante` int NOT NULL,
+  `plato_imagen` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_plato`),
   KEY `fk_tbl_platos_tbl_restaurante1_idx` (`id_restaurante`),
   CONSTRAINT `fk_tbl_platos_tbl_restaurante1` FOREIGN KEY (`id_restaurante`) REFERENCES `tbl_restaurante` (`id_restaurante`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
 
 -- Crear tabla `tbl_restu_cocina`
 CREATE TABLE IF NOT EXISTS `tbl_restu_cocina` (

@@ -46,6 +46,10 @@
         a:hover {
             text-decoration: underline;
         }
+
+        #valoracionForm {
+            display: none;
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css" />
@@ -63,6 +67,7 @@
     ?>
     <div id="platos"></div>
 
+    <a href="#" id="mostrarFormulario">Mostrar Formulario de Valoración</a>
     <!-- Formulario para insertar valoraciones -->
     <form id="valoracionForm">
         <label for="valoracion">Valoración:</label>
@@ -106,10 +111,10 @@
                 "startColor": "#FF0000", //RED
                 "endColor": "#00FF00" //GREEN
             },
-            onChange: function (rating, rateYoInstance) {
+            onChange: function(rating, rateYoInstance) {
                 $("#valoracion").val(rating);
             }
-            
+
         });
 
     });

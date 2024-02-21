@@ -24,6 +24,7 @@ function fetchRestaurantInfo() {
                 platosDiv.innerHTML += "<ul>";
                 response.products.forEach(function (product) {
                     platosDiv.innerHTML += "<li>" + product.plato_descripcion + " - Precio: " + product.plato_precio + "€</li>";
+                    platosDiv.innerHTML += "<img src='img/" + product.plato_imagen + "'>";
                 });
                 platosDiv.innerHTML += "</ul>";
             } else {
