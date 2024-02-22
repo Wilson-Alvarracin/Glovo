@@ -19,3 +19,5 @@ try {
     echo json_encode(array('success' => false, 'message' => 'Error al obtener los restaurantes: ' . $e->getMessage()));
 }
 ?>
+
+

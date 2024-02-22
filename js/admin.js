@@ -1,5 +1,5 @@
-   // Función para mostrar el contenido deseado y ocultar el resto
-   function mostrarContenido(seccion) {
+// Función para mostrar el contenido deseado y ocultar el resto
+function mostrarContenido(seccion) {
     // Obtener el div de la sección correspondiente
     var div = document.getElementById(seccion);
     
@@ -21,9 +21,67 @@
     });
 }
 
+// Al cargar la página, mostrar inicialmente la sección de restaurantes
+window.addEventListener('load', function() {
+    mostrarContenido('restaurantes');
+});
 
 
 
+
+function crearTipoComida() {
+    Swal.fire({
+        title: 'Crear Nuevo Tipo de Cocina',
+        html: '<input id="tipoCocinaInput" class="swal2-input" placeholder="Nombre del Tipo de Cocina">',
+        showCancelButton: true,
+        confirmButtonText: 'Crear',
+        cancelButtonText: 'Cancelar',
+        preConfirm: () => {
+            const tipoCocina = Swal.getPopup().querySelector('#tipoCocinaInput').value;
+            if (!tipoCocina) {
+                Swal.showValidationMessage('Por favor, ingresa el nombre del tipo de cocina');
+                return false;
+            }
+            return { tipo_cocina: tipoCocina };
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Realizar la solicitud AJAX para crear el tipo de cocina
+            $.ajax({
+                url: './proc/crear_tipo_cocina.php',
+                method: 'POST',
+                dataType: 'json',
+                data: result.value,
+                success: function(response) {
+                    // Mostrar alerta de éxito o error
+                    if (response.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Éxito',
+                            text: response.message
+                        }).then(() => {
+                            // Recargar la página después de cerrar la alerta
+                            location.reload();
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: response.message
+                        });
+                    }
+                },
+                error: function(xhr, status, error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Hubo un error al procesar la solicitud.'
+                    });
+                }
+            });
+        }
+    });
+}
 
 
 
@@ -767,6 +825,77 @@ cargarUsuarios();
 
 
 
+//FILTRO
+
+$(document).ready(function() {
+    // Cargar los platos al cargar la página
+    cargarPlatos();
+
+    // Manejar el envío del formulario de filtro mediante AJAX
+    $('#filtroForm').submit(function(event) {
+        // Evitar que el formulario se envíe de forma tradicional
+        event.preventDefault();
+        // Obtener los datos del formulario
+        var formData = $(this).serialize();
+        // Realizar la solicitud AJAX para filtrar los platos
+        filtrarPlatos(formData);
+    });
+
+    // Función para cargar todos los platos
+    function cargarPlatos() {
+        $.ajax({
+            type: 'GET',
+            url: './proc/procesar_platos.php', // Ruta al archivo PHP que manejará la solicitud
+            success: function(response) {
+                // Actualizar la tabla de platos con los datos recibidos
+                $('#tablaPlatos').html(response);
+            },
+            error: function(xhr, status, error) {
+                // Manejar errores de la solicitud
+                console.error(error);
+            }
+        });
+    }
+
+    // Función para filtrar los platos
+    function filtrarPlatos(formData) {
+        $.ajax({
+            type: 'GET',
+            url: './proc/procesar_platos.php', // Ruta al archivo PHP que manejará la solicitud
+            data: formData,
+            success: function(response) {
+                // Actualizar la tabla de platos con los datos filtrados
+                $('#tablaPlatos').html(response);
+            },
+            error: function(xhr, status, error) {
+                // Manejar errores de la solicitud
+                console.error(error);
+            }
+        });
+    }
+
+    // Cargar los restaurantes en el filtro de restaurante
+    function cargarRestaurantes() {
+        $.ajax({
+            type: 'GET',
+            url: './proc/procesar_restaurantes.php', // Ruta al archivo PHP que manejará la solicitud
+            success: function(response) {
+                // Actualizar el select de restaurante con los datos recibidos
+                $('#filtroRestaurante').html(response);
+            },
+            error: function(xhr, status, error) {
+                // Manejar errores de la solicitud
+                console.error(error);
+            }
+        });
+    }
+
+    // Llamar a la función para cargar los restaurantes al cargar la página
+    cargarRestaurantes();
+});
+
+
+
 
 
 
@@ -778,45 +907,99 @@ cargarUsuarios();
 
 
 $(document).ready(function() {
-// Función para cargar los platos
-function cargarPlatos() {
+    // Función para cargar los platos
+    function cargarPlatos(filtros = {}) {
+        $.ajax({
+            url: './proc/obtener_platos.php',
+            method: 'GET',
+            data: filtros, // Pasar los filtros como parámetro
+            dataType: 'json',
+            success: function(data) {
+                const tbody = $('#tablaPlatos tbody');
+                tbody.empty();
+                data.forEach(function(plato) {
+                    const tr = $('<tr>');
+                    tr.append($('<td>').text(plato.id_plato));
+                    tr.append($('<td>').text(plato.plato_descripcion));
+                    tr.append($('<td>').text(plato.plato_precio));
+                    tr.append($('<td>').text(plato.nombre_restaurante)); // Mostrar el nombre del restaurante
+                    // Botones de edición y eliminación
+                    const acciones = $('<td>');
+                    const editarBtn = $('<button>').text('Editar').click(function() {
+                        // Mostrar Sweet Alert para editar el plato
+                        mostrarEditarPlatoAlert(plato);
+                    });
+                    const eliminarBtn = $('<button>').text('Eliminar').click(function() {
+                        // Lógica para eliminar el plato aquí
+                        eliminarPlato(plato.id_plato);
+                    });
+                    acciones.append(editarBtn).append(' ').append(eliminarBtn);
+                    tr.append(acciones);
+                    tbody.append(tr);
+                });
+            },
+            error: function(xhr, status, error) {
+                // Mostrar mensaje de error descriptivo
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Hubo un error al cargar la lista de platos: ' + error
+                });
+            }
+        });
+    }
+
+    // Llamar a cargarPlatos() al cargar la página para mostrar todos los platos por defecto
+    cargarPlatos();
+
+    // Evento de cambio en los filtros para volver a cargar los platos según los nuevos filtros
+    $('#filtroNombrePlato, #filtroPrecioMin, #filtroPrecioMax, #filtroRestaurante').on('change', function() {
+        const filtros = {
+            nombrePlato: $('#filtroNombrePlato').val(),
+            precioMin: $('#filtroPrecioMin').val(),
+            precioMax: $('#filtroPrecioMax').val(),
+            idRestaurante: $('#filtroRestaurante').val()
+        };
+        cargarPlatos(filtros);
+    });
+
+    // Cargar la lista de restaurantes al cargar la página
     $.ajax({
-        url: './proc/obtener_platos.php',
+        url: './proc/obtener_restaurante_platos2.php',
         method: 'GET',
         dataType: 'json',
         success: function(data) {
-            const tbody = $('#tablaPlatos tbody');
-            tbody.empty();
-            data.forEach(function(plato) {
-                const tr = $('<tr>');
-                tr.append($('<td>').text(plato.id_plato));
-                tr.append($('<td>').text(plato.plato_descripcion));
-                tr.append($('<td>').text(plato.plato_precio));
-                tr.append($('<td>').text(plato.nombre_restaurante)); // Mostrar el nombre del restaurante
-                // Botones de edición y eliminación
-                const acciones = $('<td>');
-                const editarBtn = $('<button>').text('Editar').click(function() {
-                    // Mostrar Sweet Alert para editar el plato
-                    mostrarEditarPlatoAlert(plato);
-                });
-                const eliminarBtn = $('<button>').text('Eliminar').click(function() {
-                    // Lógica para eliminar el plato aquí
-                    eliminarPlato(plato.id_plato);
-                });
-                acciones.append(editarBtn).append(' ').append(eliminarBtn);
-                tr.append(acciones);
-                tbody.append(tr);
+            const filtroRestaurante = $('#filtroRestaurante');
+            filtroRestaurante.empty();
+            filtroRestaurante.append($('<option>').val('').text('Todos')); // Opción por defecto
+            data.forEach(function(restaurante) {
+                filtroRestaurante.append($('<option>').val(restaurante.id_restaurante).text(restaurante.rest_nom));
             });
         },
         error: function(xhr, status, error) {
+            // Mostrar mensaje de error descriptivo
+            console.error(error);
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'Hubo un error al cargar la lista de platos.'
+                text: 'Hubo un error al cargar la lista de restaurantes: ' + error
             });
         }
     });
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Función para mostrar el Sweet Alert para editar el plato
 function mostrarEditarPlatoAlert(plato) {
@@ -939,7 +1122,6 @@ cargarPlatos();
 
 
 
-// Función para mostrar el formulario de creación de platos
 $('#btnAgregarPlato').click(function() {
     // Realizar la solicitud AJAX para obtener todos los restaurantes
     $.ajax({
@@ -971,9 +1153,16 @@ $('#btnAgregarPlato').click(function() {
                         const precio = Swal.getPopup().querySelector('#swal-input2').value;
                         const idRestaurante = Swal.getPopup().querySelector('#swal-select-restaurantes').value;
 
+                        // Validar que el campo "Nombre" no esté vacío y contenga solo letras
+                        if (!nombre || !/^[a-zA-Z]+$/.test(nombre)) {
+                            Swal.showValidationMessage('El nombre del plato no puede estar vacío y debe contener solo letras');
+                            return false;
+                        }
+
                         // Verificar si el precio es un número
                         if (!precio || isNaN(parseFloat(precio))) {
-                            Swal.showValidationMessage('El precio solo puede tener numeros');
+                            Swal.showValidationMessage('El precio solo puede tener números');
+                            return false;
                         }
 
                         return { nombre: nombre, precio: precio, idRestaurante: idRestaurante };

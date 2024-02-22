@@ -2,45 +2,233 @@
         .hidden {
             display: none;
         }
+        
+        /* Establecer la altura de la página al 100% del viewport */
+html, body {
+    height: 100%;
+    font-family: Arial;
+}
 
-        /* Estilo para el encabezado */
-        header {
-            text-align: center;
-            background-color: #ffc244; /* Color de fondo */
-            padding: 20px 0; /* Espaciado interior */
-        }
 
-        /* Estilo para los botones del encabezado */
-        header button {
-            background-color: white; /* Color de fondo inicial */
-            color: #000; /* Color del texto */
-            border: 2px solid #000; /* Borde sólido */
-            padding: 10px 20px; /* Espaciado interior */
-            margin: 0 10px; /* Margen entre botones */
-            cursor: pointer;
-        }
 
-        /* Estilo para los botones del encabezado cuando están activos */
-        header button:active {
-            background-color: green; /* Color de fondo cuando se pulsa */
-        }
 
-        /* Estilo para las tablas */
-        table {
-            margin: 0 auto; /* Centrar la tabla */
-            border-collapse: collapse; /* Colapso de borde de tabla */
-            width: 80%; /* Ancho de la tabla */
-        }
 
-        /* Estilo para las celdas de la tabla */
-        th, td {
-            border: 1px solid #000; /* Borde sólido */
-            padding: 8px; /* Espaciado interior */
-            text-align: left; /* Alineación del texto */
-        }
 
-        /* Estilo para las celdas de encabezado de la tabla */
-        th {
-            background-color: #ffc244; /* Color de fondo */
-            color: white; /* Color del texto */
-        }
+
+
+
+
+
+/* Estilo para el botón Buscar dentro del div #restaurantes */
+#restaurantes button[type="submit"] {
+    background-color: #ffc244; /* Color de fondo amarillo */
+    font-size: 20px; /* Tamaño de fuente */
+    font-weight: bold; /* Hacer la letra más ancha */
+    color: #00a082; /* Color de texto verde */
+}
+
+
+
+
+
+/* Estilo para los botones con formato */
+.boton-formato {
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #00a082;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Estilo para el hover */
+.boton-formato:hover {
+    background-color: #00845e;
+    color: #eee;
+}
+
+
+
+/* Estilo para los botones */
+button {
+    border-radius: 8px; /* Bordes redondos */
+    padding: 10px 20px; /* Espaciado interior */
+    font-size: 16px; /* Tamaño de la fuente */
+}
+
+/* Estilo para los botones del div */
+.boton-seleccion {
+    border-radius: 30px; /* Bordes redondeados */
+    padding: 15px 30px; /* Espaciado interior */
+    font-size: 18px; /* Tamaño de fuente */
+    margin: 10px; /* Margen entre botones */
+    background-color: #00a082; /* Color de fondo */
+    color: #fff; /* Color del texto */
+    border: none; /* Eliminar borde */
+    cursor: pointer; /* Cambiar cursor al pasar sobre el botón */
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s; /* Transición suave */
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra */
+}
+
+/* Estilo para el hover */
+.boton-seleccion:hover {
+    background-color: #00845e; /* Color de fondo al pasar el mouse */
+    color: #eee; /* Color del texto al pasar el mouse */
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.4); /* Sombra más pronunciada */
+}
+
+
+
+/* Estilo para los botones específicos */
+#btnAgregarRestaurante,
+#btnCrearTipoComida {
+    border-radius: 8px; /* Bordes redondos */
+    padding: 10px 20px; /* Espaciado interior */
+    font-size: 16px; /* Tamaño de la fuente */
+}
+
+
+
+
+/* Establecer el tamaño del contenido al 100% del viewport */
+#restaurantes, #usuarios, #platos {
+    height: calc(100% - 60px); /* Restar la altura del encabezado */
+    overflow-y: auto; /* Permitir el desplazamiento vertical si el contenido es demasiado largo */
+}
+
+/* Estilo para el encabezado */
+header {
+    text-align: center;
+    background-color: #ffc244; /* Color de fondo */
+    padding: 20px 0; /* Espaciado interior */
+    border-radius: 10px; /* Bordes redondeados */
+    margin-bottom: 20px; /* Margen inferior para separar del contenido */
+}
+
+/* Estilo para los botones del encabezado */
+header button {
+    background-color: white; /* Color de fondo inicial */
+    color: #000; /* Color del texto */
+    border: 2px solid #000; /* Borde sólido */
+    padding: 10px 20px; /* Espaciado interior */
+    margin: 0 10px; /* Margen entre botones */
+    cursor: pointer;
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+
+/* Estilo para el formulario */
+form {
+    color: white;
+    font-size: 20px;
+    padding-top: 5px;
+    border: 2px solid #ccc; /* Borde sólido con color gris claro */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 0px; /* Espaciado interior */
+    background-color: #00a082; /* Color de fondo */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    width: 80%; /* Igualar al ancho de la tabla */
+    margin: 0 auto; /* Centrar horizontalmente */
+    border: 1px solid #000; /* Borde sólido */
+    font-weight: bold; /* Hacer la letra más ancha */
+}
+
+/* Estilo para las tablas */
+table {
+    margin: 0 auto; /* Centrar la tabla */
+    border-collapse: collapse; /* Colapso de borde de tabla */
+    width: 80%; /* Ancho de la tabla */
+    border-radius: 10px; /* Bordes redondeados */
+    overflow: hidden; /* Ocultar contenido desbordado */
+}
+
+/* Estilo para las filas impares de la tabla */
+tr:nth-child(odd) {
+    background-color: #eef7f3; /* Fondo blanco para filas impares */
+}
+
+/* Estilo para las filas pares de la tabla */
+tr:nth-child(even) {
+    background-color: #d7efe3; /* Fondo verde claro para filas pares */
+}
+
+/* Estilo para las celdas de la tabla */
+th, td {
+    border: 1px solid #000; /* Borde sólido */
+    padding: 8px; /* Espaciado interior */
+    text-align: center; /* Alineación centrada del texto */
+}
+
+/* Estilo para las celdas de encabezado de la tabla */
+th {
+    background-color: #00a082; /* Color de fondo */
+    color: white; /* Color del texto */
+}
+
+/* Estilo para los formularios de filtro */
+form {
+    text-align: center; /* Centrar contenido */
+}
+
+
+/* Estilo para los campos de filtro */
+form input[type="text"],
+form input[type="number"],
+form select {
+    margin: 5px; /* Margen entre elementos */
+    padding: 5px; /* Espaciado interior */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+/* Estilo para los botones de filtrado y agregar */
+#btnAgregarUsuario,
+#btnAgregarPlato,
+button[type="submit"] {
+    margin: 5px; /* Margen entre elementos */
+    padding: 10px 20px; /* Espaciado interior */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer;
+}
+
+/* Estilo para los botones de filtrado y agregar cuando se presionan */
+#btnAgregarUsuario:active,
+#btnAgregarPlato:active,
+button[type="submit"]:active {
+    background-color: green; /* Color de fondo cuando se pulsa */
+    color: white; /* Color del texto */
+}
+
+
+/* Estilo para los filtros dentro de los divs */
+div > label {
+    display: block; /* Mostrar los labels como bloques */
+    text-align: center; /* Centrar el texto */
+    margin-bottom: 5px; /* Margen inferior */
+}
+
+div > input[type="text"],
+div > input[type="number"],
+div > select {
+    /* display: block; */ /* Quitar esta línea */
+    /* margin: 0 auto 10px; */ /* Quitar esta línea */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 5px; /* Espaciado interior */
+}
+
+/* Estilo para el contenedor de filtros */
+div > div {
+    display: flex; /* Utilizar flexbox */
+    flex-wrap: wrap; /* Permitir que los elementos se envuelvan en varias líneas */
+    justify-content: center; /* Centrar horizontalmente los elementos */
+}
+
+/* Estilo para los elementos dentro del contenedor de filtros */
+div > div > label,
+div > div > input[type="text"],
+div > div > input[type="number"],
+div > div > select {
+    margin: 5px; /* Margen entre elementos */
+}

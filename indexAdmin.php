@@ -9,75 +9,107 @@
     <script src="./js/admin.js"></script>
 </head>
 <header>
-    <h1>GLOVO Admin</h1>
+<h1><img src="./img/glovo.jpg" alt="Glovo Logo"></h1>
 
     <!-- Header con botones para seleccionar la sección -->
     <div>
-        <button onclick="mostrarContenido('restaurantes')">Restaurantes</button>
-        <button onclick="mostrarContenido('usuarios')">Usuarios</button>
-        <button onclick="mostrarContenido('platos')">Platos</button>
-    </div>
+    <button class="boton-seleccion" onclick="mostrarContenido('restaurantes')">Restaurantes</button>
+    <button class="boton-seleccion" onclick="mostrarContenido('usuarios')">Usuarios</button>
+    <button class="boton-seleccion" onclick="mostrarContenido('platos')">Platos</button>
+</div>
 
 </header>
 
 <body>
-    <!-- Contenido de Restaurantes -->
-    <div id="restaurantes" class="hidden">
-        <!-- CRUD de Restaurantes -->
-        <h2>Restaurantes</h2>
-                <!-- Botón para añadir restaurante -->
-                <button onclick="mostrarFormulario()">Añadir Restaurante</button>   
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Gerente</th>
-                <th>Tipo Comida</th>
-                <th>Acciones</th>
-            </tr>
-            <?php
-// Incluir el archivo de conexión PDO
-require_once './proc/conexion.php';
+<!-- Contenido de Restaurantes -->
+<div id="restaurantes" class="hidden">
+    <!-- CRUD de Restaurantes -->
+    <h2>Restaurantes</h2>
+    <!-- Formulario para filtros -->
 
-// Consulta SQL para obtener todos los restaurantes con su tipo de cocina
-$sql = "SELECT 
-            r.id_restaurante,
-            r.rest_nom,
-            r.rest_desc,
-            u.usr_nom AS nombre_gerente,
-            c.cocina_nom AS tipo_cocina 
-        FROM 
-            tbl_restaurante r
-        INNER JOIN 
-            tbl_usr u ON r.id_usr_gerente = u.id_usr
-        INNER JOIN 
-            tbl_restu_cocina rc ON r.id_restaurante = rc.id_restaurante
-        INNER JOIN 
-            tbl_cocinas c ON rc.tipo_cocina = c.id_cocina";
+        <!-- Botón para añadir restaurante -->
+        <button onclick="mostrarFormulario()">Añadir Restaurante</button>   
+    <button onclick="crearTipoComida()">Crear tipo comida</button>  
+    <br>
+    <br>    
+    
+    <form method="GET" action="">
+        <label for="nombreRestaurante">Nombre Restaurante:</label>
+        <input type="text" id="nombreRestaurante" name="nombreRestaurante">
+        <label for="nombreGerente">Nombre Gerente:</label> 
+        <input type="text" id="nombreGerente" name="nombreGerente">
+        <label for="tipoCocina">Tipo Cocina:</label>
+        <input type="text" id="tipoCocina" name="tipoCocina">
+        <button type="submit">Buscar</button>
+    </form>
 
-$stmt = $conn->prepare($sql);
-$stmt->execute();
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Gerente</th>
+            <th>Tipo Comida</th>
+            <th>Acciones</th>
+        </tr>
+        <?php
+        // Incluir el archivo de conexión PDO
+        require_once './proc/conexion.php';
 
-// Mostrar datos de todos los restaurantes
-while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-    echo "<tr>";
-    echo "<td>".$row["id_restaurante"]."</td>";
-    echo "<td>".$row["rest_nom"]."</td>";
-    echo "<td>".$row["rest_desc"]."</td>";
-    echo "<td>".$row["nombre_gerente"]."</td>";
-    echo "<td>".$row["tipo_cocina"]."</td>"; // Mostrar el tipo de cocina
-    echo "<td>
-            <a href='javascript:void(0);' onclick='editarRestaurante(".$row["id_restaurante"].")'>Editar</a> | 
-            <a href='javascript:void(0);' onclick='eliminarRestaurante(".$row["id_restaurante"].")'>Eliminar</a>
+        // Definir variables para los filtros (pueden provenir de un formulario)
+        $nombreRestaurante = isset($_GET['nombreRestaurante']) ? $_GET['nombreRestaurante'] : '';
+        $nombreGerente = isset($_GET['nombreGerente']) ? $_GET['nombreGerente'] : '';
+        $tipoCocina = isset($_GET['tipoCocina']) ? $_GET['tipoCocina'] : '';
+
+        // Consulta SQL para obtener restaurantes con filtros
+        $sql = "SELECT 
+                    r.id_restaurante,
+                    r.rest_nom,
+                    r.rest_desc,
+                    u.usr_nom AS nombre_gerente,
+                    c.cocina_nom AS tipo_cocina 
+                FROM 
+                    tbl_restaurante r
+                INNER JOIN 
+                    tbl_usr u ON r.id_usr_gerente = u.id_usr
+                INNER JOIN 
+                    tbl_restu_cocina rc ON r.id_restaurante = rc.id_restaurante
+                INNER JOIN 
+                    tbl_cocinas c ON rc.tipo_cocina = c.id_cocina
+                WHERE 
+                    (:nombreRestaurante = '' OR r.rest_nom LIKE :nombreRestaurante)
+                    AND (:nombreGerente = '' OR u.usr_nom LIKE :nombreGerente)
+                    AND (:tipoCocina = '' OR c.cocina_nom LIKE :tipoCocina)";
+
+        $stmt = $conn->prepare($sql);
+
+        // Asignar valores a los parámetros y ejecutar la consulta
+        $stmt->execute([
+            ':nombreRestaurante' => '%' . $nombreRestaurante . '%',
+            ':nombreGerente' => '%' . $nombreGerente . '%',
+            ':tipoCocina' => '%' . $tipoCocina . '%'
+        ]);
+
+        // Mostrar datos de los restaurantes filtrados
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            echo "<tr>";
+            echo "<td>".$row["id_restaurante"]."</td>";
+            echo "<td>".$row["rest_nom"]."</td>";
+            echo "<td>".$row["rest_desc"]."</td>";
+            echo "<td>".$row["nombre_gerente"]."</td>";
+            echo "<td>".$row["tipo_cocina"]."</td>"; // Mostrar el tipo de cocina
+            echo "<td>
+            <button class='boton-formato' onclick='editarRestaurante(".$row["id_restaurante"].")'>Editar</button> 
+            <button class='boton-formato' onclick='eliminarRestaurante(".$row["id_restaurante"].")'>Eliminar</button>
           </td>";
-    echo "</tr>";
-}
-?>
+    
+    
+            echo "</tr>";
+        }
+        ?>
+    </table>
+</div>
 
-
-        </table>
-    </div>
 
 <!-- Contenido de Usuarios -->
 <div id="usuarios" class="hidden">
@@ -90,7 +122,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     <!-- Tabla para mostrar la lista de usuarios -->
 
 
-    <div>
+    <form>
         <label for="filtroNombre">Filtrar por Nombre:</label>
         <input type="text" id="filtroNombre" />
 
@@ -107,7 +139,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         </select>
         <br>
 
-    </div>
+    </form>
     <table id="tablaUsuarios">
         <thead>
             <tr>
@@ -131,8 +163,29 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 <div id="platos" class="hidden">
     <!-- Aquí va el contenido de Platos -->
     <h2>Platos</h2>
-    <!-- Botón para agregar un nuevo plato -->
-    <button id="btnAgregarPlato">Agregar Plato</button>
+    <!-- Barra de filtro -->
+
+
+        <!-- Botón para agregar un nuevo plato -->
+        <button id="btnAgregarPlato">Agregar Plato</button>
+
+    <form>
+        <label for="filtroNombrePlato">Filtrar por Nombre:</label>
+        <input type="text" id="filtroNombrePlato" />
+
+        <label for="filtroPrecioMin">Precio Mínimo:</label>
+        <input type="number" id="filtroPrecioMin" />
+
+        <label for="filtroPrecioMax">Precio Máximo:</label>
+        <input type="number" id="filtroPrecioMax" />
+
+        <label for="filtroRestaurante">Filtrar por Restaurante:</label>
+        <select id="filtroRestaurante">
+            <option value="">Todos</option>
+            <!-- Aquí se cargarán los restaurantes -->
+        </select>
+    </form>
+
     <!-- Tabla para mostrar los platos -->
     <table id="tablaPlatos">
         <thead>
@@ -149,4 +202,5 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         </tbody>
     </table>
 </div>
+
 </html>

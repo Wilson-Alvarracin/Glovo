@@ -8,11 +8,11 @@ if (isset($_POST['id'])) {
     $id = $_POST['id'];
 
     try {
-        // Eliminar los registros de tbl_restu_cocina relacionados con el restaurante
-        $sqlDeleteRestuCocina = "DELETE FROM tbl_restu_cocina WHERE id_restaurante = :id";
-        $stmtDeleteRestuCocina = $conn->prepare($sqlDeleteRestuCocina);
-        $stmtDeleteRestuCocina->bindParam(':id', $id);
-        $stmtDeleteRestuCocina->execute();
+        // Eliminar las valoraciones relacionadas con el restaurante
+        $sqlDeleteValoraciones = "DELETE FROM tbl_valoracion WHERE id_rest = :id";
+        $stmtDeleteValoraciones = $conn->prepare($sqlDeleteValoraciones);
+        $stmtDeleteValoraciones->bindParam(':id', $id);
+        $stmtDeleteValoraciones->execute();
 
         // Eliminar los platos asociados al restaurante
         $sqlDeletePlatos = "DELETE FROM tbl_platos WHERE id_restaurante = :id";
@@ -20,7 +20,13 @@ if (isset($_POST['id'])) {
         $stmtDeletePlatos->bindParam(':id', $id);
         $stmtDeletePlatos->execute();
 
-        // Eliminar el restaurante
+        // Eliminar los registros de tbl_restu_cocina relacionados con el restaurante
+        $sqlDeleteRestuCocina = "DELETE FROM tbl_restu_cocina WHERE id_restaurante = :id";
+        $stmtDeleteRestuCocina = $conn->prepare($sqlDeleteRestuCocina);
+        $stmtDeleteRestuCocina->bindParam(':id', $id);
+        $stmtDeleteRestuCocina->execute();
+
+        // Finalmente, eliminar el restaurante
         $sqlDeleteRestaurante = "DELETE FROM tbl_restaurante WHERE id_restaurante = :id";
         $stmtDeleteRestaurante = $conn->prepare($sqlDeleteRestaurante);
         $stmtDeleteRestaurante->bindParam(':id', $id);
