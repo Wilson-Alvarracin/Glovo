@@ -1,10 +1,10 @@
-
 var btnValoracion = document.getElementById('btn_valoracion');
 btnValoracion.onclick = insertarValoracion;
 
 var formularioVisible = false;
 
-document.getElementById('mostrarFormulario').onclick = function () {
+
+document.getElementById('mostrarFormulario').onclick = function() {
     var formulario = document.getElementById('valoracionForm');
     formulario.style.display = formularioVisible ? 'none' : 'block';
     formularioVisible = !formularioVisible;
@@ -21,7 +21,7 @@ function insertarValoracion() {
     xhr.open('POST', 'insertar_valoracion.php', true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-    xhr.onload = function () {
+    xhr.onload = function() {
         if (xhr.status >= 200 && xhr.status < 300) {
             // Parsear la respuesta JSON
             var response = JSON.parse(xhr.responseText);
