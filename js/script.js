@@ -12,37 +12,37 @@ document.addEventListener('DOMContentLoaded', function() {
     var valor = document.getElementById('input');
 
     // Dentro del evento scroll
-    window.addEventListener('scroll', function() {
-        const scrollPosition = window.scrollY;
-        const header = document.getElementById('navBar');
+    // window.addEventListener('scroll', function() {
+    //     const scrollPosition = window.scrollY;
+    //     const header = document.getElementById('navBar');
 
-        let inputValue = '';
-        // Evento para detectar cambios en el input
-        header.addEventListener('input', function(event) {
-            inputValue = event.target.value;
-        });
+    //     let inputValue = '';
+    //     // Evento para detectar cambios en el input
+    //     header.addEventListener('input', function(event) {
+    //         inputValue = event.target.value;
+    //     });
 
-        if (scrollPosition > 600 ) {
-            if (!header.classList.contains('input-restaurante')) {
-                header.classList.add('input-restaurante'); // Agregamos la clase del input
-                header.innerHTML = originalHeaderHTML + `
-                    <div class="input-group mb-3 bottom-input">
-                        <span class="input-group-text green" id="basic-addon1"><i class="bi bi-search"></i></span>
-                        <input id='bottomInput' type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-                    </div>`;
-            }
-        } else if (scrollPosition > 0) {
-            if (!header.classList.contains('scrolled')) {
-                header.classList.add('scrolled'); // Agregamos la clase del scroll
-            } else {
-                header.innerHTML = originalHeaderHTML; // Restaurar el contenido original
-                header.classList.remove('input-restaurante'); // Borramos la clase del input
-            }
-        } else {
-            header.classList.remove('scrolled'); // Borramos la clase del scroll
-            header.innerHTML = originalHeaderHTML; // Restaurar el contenido original
-        }
-    });
+    //     if (scrollPosition > 600 ) {
+    //         if (!header.classList.contains('input-restaurante')) {
+    //             header.classList.add('input-restaurante'); // Agregamos la clase del input
+    //             header.innerHTML = originalHeaderHTML + `
+    //                 <div class="input-group mb-3 bottom-input">
+    //                     <span class="input-group-text green" id="basic-addon1"><i class="bi bi-search"></i></span>
+    //                     <input id='bottomInput' type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+    //                 </div>`;
+    //         }
+    //     } else if (scrollPosition > 0) {
+    //         if (!header.classList.contains('scrolled')) {
+    //             header.classList.add('scrolled'); // Agregamos la clase del scroll
+    //         } else {
+    //             header.innerHTML = originalHeaderHTML; // Restaurar el contenido original
+    //             header.classList.remove('input-restaurante'); // Borramos la clase del input
+    //         }
+    //     } else {
+    //         header.classList.remove('scrolled'); // Borramos la clase del scroll
+    //         header.innerHTML = originalHeaderHTML; // Restaurar el contenido original
+    //     }
+    // });
     });
 
 // Selecciona el botón por su id

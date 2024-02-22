@@ -44,52 +44,57 @@
     <div id="int-1" class="margen">
         <img src="https://glovoapp.com/images/waves/address-jumbotron-wave-desktop.svg" alt="" srcset="">
     </div>
-    <!-- BUSCADOR CON FILTROS -->
-    <div id="section-2" class="slt column-1 flex">
-        <div id="buscador" class="">
-            <div class="column-2">
-                <div class="input-group input-group-sm">
-                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                </div>
-            </div>
-            <div class="column-4">
-            <select class="form-select form-select-sm" aria-label="Default select example">
-                <option selected>Tipo de Cocina</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
-            </div>
-            <div class="column-4">
-            <select class="form-select form-select-sm" aria-label="Default select example">
-                <option selected>Precio medio</option>
-                <option value="1">€€€ Mas de 20€</option>
-                <option value="2">€€ Entre 10€ a 20€</option>
-                <option value="3">€ Menos de 10€</option>
-            </select>
-            </div>
-        </div>
-    </div>
 
-    <div id="restaurantes" class="slt">
-        <div class="column-4 flex">
-            <div class="card">
-                <a href="./view.php">
-                    <img src="./../resorces/img/sushisom.png" class="card-img-top" alt="...">
-                </a>
-                <div class="card-body">
-                    <h3 class="card-title">SushiSom</h3>
-                    <div class="label">
-                        <span class="label-name flex"><box-icon name='restaurant'></box-icon></box-icon>Asiática</span>
+    <div id="home">
+        <!-- BUSCADOR CON FILTROS -->
+        <div class="slt column-1 flex">
+            <div id="buscador" class="">
+                <div class="column-2">
+                    <div class="input-group input-group-sm">
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                     </div>
-                    <div class="label">
-                        <span class="label-name flex"><box-icon name='leaf' rotate='270' color='#00d40f'></box-icon>bug</span>
-                    </div>
-                    <P>valoracion: 4,5/5</P>
-                    <p class="card-text">La Farga, Hospitalet de Llobregat</p>
+                </div>
+                <div class="column-4">
+                <select class="form-select form-select-sm" aria-label="Default select example">
+                    <option selected>Tipo de Cocina</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+                </div>
+                <div class="column-4">
+                <select class="form-select form-select-sm" aria-label="Default select example">
+                    <option selected>Precio medio</option>
+                    <option value="1">€€€ Mas de 20€</option>
+                    <option value="2">€€ Entre 10€ a 20€</option>
+                    <option value="3">€ Menos de 10€</option>
+                </select>
                 </div>
             </div>
         </div>
+    
+        <div id="restaurantes" class="slt">
+            <div class="column-4 flex">
+                <div class="card">
+                    <a href="./view.php">
+                        <img src="./../resorces/img/sushisom.png" class="card-img-top" alt="...">
+                    </a>
+                    <div class="card-body">
+                        <h3 class="card-title">SushiSom</h3>
+                        <div class="label">
+                            <span class="label-name flex"><box-icon name='restaurant'></box-icon></box-icon>Asiática</span>
+                        </div>
+                        <div class="label">
+                            <span class="label-name flex"><box-icon name='leaf' rotate='270' color='#00d40f'></box-icon>bug</span>
+                        </div>
+                        <P>valoracion: 4,5/5</P>
+                        <p class="card-text">La Farga, Hospitalet de Llobregat</p>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+    <script src="./../js/home.js"></script>
 <!-- <script src="./../js/script.js"></script> -->
 </body>
 </html>

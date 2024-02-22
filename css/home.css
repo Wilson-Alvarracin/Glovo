@@ -178,7 +178,24 @@ span#basic-addon1{
     border-radius: 20px;
     font-size: 12px;
     font-weight: bold;
+}
+
+.clr-price{
+    background-color: #ffc244;
+    color: #000;
+}
+
+.clr-1{
     background-color: #00A082;
+    color: white; /* Color de texto negro */
+
+}
+.clr-2{
+    background-color: #8b00a0;
+    color: white; /* Color de texto negro */
+}
+.clr-3{
+    background-color: #005da0;
     color: white; /* Color de texto negro */
 }
 
@@ -239,8 +256,8 @@ span#basic-addon1{
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease-in-out;
     margin: 20px;
-    width: 26rem;
-    height: 25rem;
+    width: auto;
+    height: auto;
     text-align: center; /* Centra el contenido dentro del contenedor */
 }
 
