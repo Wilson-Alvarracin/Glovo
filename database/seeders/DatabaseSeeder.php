@@ -1,22 +1,22 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Factories;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-class DatabaseSeeder extends Seeder
+class ComicsFactory extends Factory
 {
     /**
-     * Seed the application's database.
+     * Define the model's default state.
+     *
+     * @return array
      */
-    public function run(): void
+    public function definition()
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        return [
+            'titulo' => $this->faker->sentence(),
+            'coleccion' => $this->faker->randomElement(['X-men', 'Doctor Muerte', 'Batman', 'Superman']),
+            'genero' => $this->faker->randomElement(['Ficción', 'Bélico', 'Deportivo'])
+        ];
     }
 }
