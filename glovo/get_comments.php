@@ -39,7 +39,7 @@ if ($result) {
 
             // Agregar botón de borrar si el usuario actual es el que hizo la valoración
             // if (isset($_SESSION['id_user']) && $_SESSION['id_user'] == $row['user_id']) {
-                // $contenido .= ' | <button onclick="borrarValoracion(' . $row['user_id'] . ')">Borrar</button>';
+            // $contenido .= '<button onclick="borrarValoracion(' . $row['user_id'] . ')">Borrar</button>';
             // }
             $contenido .= '</p>';
             // $contenido .= '<button onclick=borrarValoracion('.$row['id_usr'].')>Borrar</button>';

@@ -1,10 +1,10 @@
+
 var btnValoracion = document.getElementById('btn_valoracion');
 btnValoracion.onclick = insertarValoracion;
 
 var formularioVisible = false;
 
-
-document.getElementById('mostrarFormulario').onclick = function() {
+document.getElementById('mostrarFormulario').onclick = function () {
     var formulario = document.getElementById('valoracionForm');
     formulario.style.display = formularioVisible ? 'none' : 'block';
     formularioVisible = !formularioVisible;
@@ -21,33 +21,41 @@ function insertarValoracion() {
     xhr.open('POST', 'insertar_valoracion.php', true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-    xhr.onload = function() {
+    xhr.onload = function () {
         if (xhr.status >= 200 && xhr.status < 300) {
             // Parsear la respuesta JSON
             var response = JSON.parse(xhr.responseText);
 
             // Manejar la respuesta
             if (response.success) {
-                // Mostrar SweetAlert de éxito
+                // SweetAlert de éxito personalizado
                 Swal.fire({
                     icon: 'success',
-                    title: 'Éxito',
-                    text: response.message,
+                    title: '¡Éxito!',
+                    html: '<p>' + response.message + '</p><p>¡Gracias por tu valoración!</p>',
+                    showCloseButton: true,
+                    showConfirmButton: false,
                 });
 
+                // Limpiar los campos después de una valoración exitosa
                 document.getElementById('valoracion').value = '';
                 document.getElementById('comentario').value = '';
             } else {
-                // Mostrar SweetAlert de error
+                // SweetAlert de error personalizado
                 Swal.fire({
                     icon: 'error',
-                    title: 'Error',
+                    title: '¡Error!',
                     text: response.message,
+                    footer: '<p>Por favor, inténtalo de nuevo.</p>',
+                    showCloseButton: true,
+                    confirmButtonColor: '#d33',
                 });
 
+                // Limpiar los campos después de un error en la valoración
                 document.getElementById('valoracion').value = '';
                 document.getElementById('comentario').value = '';
             }
+
         } else {
             console.error('Error al insertar la valoración. Estado: ' + xhr.status);
         }

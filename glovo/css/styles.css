@@ -1,0 +1,54 @@
+@font-face {
+    font-family: 'Gotham';
+    src: url('../fonts/Gotham-Bold.ttf') format('truetype'), url('../fonts/Gotham-Medium.ttf') format('truetype'), url('../fonts/Gotham-Light.ttf') format('truetype');
+    /* Puedes agregar más variantes de la fuente según sea necesario */
+}
+
+body {
+    font-family: 'Gotham', sans-serif;
+}
+
+.btn-custom {
+    border-radius: 30px;
+    padding: 5px 20px;
+    font-size: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.margen {
+    margin-bottom: 20px;
+}
+
+.btn-custom2 {
+    border-radius: 30px;
+    padding: 5px 20px;
+    width: 100%;
+    font-size: 15px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.inputs {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.rating {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    text-align: center;
+}
+
+.star {
+    display: inline-block;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.star:hover,
+.star.active {
+    color: gold;
+}
