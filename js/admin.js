@@ -509,15 +509,14 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Agregar Usuario',
             html:
-                '<form id="formAgregarUsuario">' +
                 '<input id="nombreUsuario" class="swal2-input" placeholder="Nombre">' +
                 '<input id="apellidoUsuario" class="swal2-input" placeholder="Apellido">' +
                 '<input id="emailUsuario" class="swal2-input" placeholder="Correo electrónico">' +
                 '<input type="password" id="passwordUsuario" class="swal2-input" placeholder="Contraseña">' +
+                '<input type="password" id="confirmPasswordUsuario" class="swal2-input" placeholder="Confirmar Contraseña">' +
                 '<select id="rolUsuario" class="swal2-select">' +
                 selectOptions +
-                '</select>' +
-                '</form>',
+                '</select>',
             showCancelButton: true,
             confirmButtonText: 'Guardar',
             cancelButtonText: 'Cancelar',
@@ -526,6 +525,13 @@ $(document).ready(function () {
                 const apellido = $('#apellidoUsuario').val();
                 const email = $('#emailUsuario').val();
                 const password = $('#passwordUsuario').val();
+                const confirmPassword = $('#confirmPasswordUsuario').val();
+
+                // Verificar si las contraseñas coinciden
+                if (password !== confirmPassword) {
+                    Swal.showValidationMessage('Las contraseñas no coinciden.');
+                    return false;
+                }
 
                 // Expresiones regulares para validar los campos
                 const nombreRegex = /^[a-zA-ZáéíóúÁÉÍÓÚ\s]+$/;
@@ -591,6 +597,7 @@ $(document).ready(function () {
 
 
 
+
 // Función para cargar la lista de usuarios desde el servidor
 function cargarUsuarios() {
     $.ajax({
@@ -609,12 +616,12 @@ function cargarUsuarios() {
                 tr.append($('<td>').text(usuario.password)); // Se agrega el campo de contraseña
                 tr.append($('<td>').text(usuario.rol)); // Se agrega el campo de rol
                 const acciones = $('<td>');
-                acciones.append($('<button>').text('Editar').click(function() {
+                acciones.append($('<button>').addClass('boton-editar').text('Editar').click(function() {
                     // Aquí puedes mostrar SweetAlert con formulario para editar usuario
                     mostrarFormularioEditar(usuario);
                 }));
                 acciones.append(' ');
-                acciones.append($('<button>').text('Eliminar').click(function() {
+                acciones.append($('<button>').addClass('boton-eliminar').text('Eliminar').click(function() {
                     // Aquí puedes mostrar SweetAlert para confirmar eliminación del usuario
                     Swal.fire({
                         title: '¿Estás seguro?',
@@ -655,7 +662,7 @@ function mostrarFormularioEditar(usuario) {
     Swal.fire({
         title: 'Editar Usuario',
         html:
-            `<form id="formEditarUsuario">
+            `
                 <input type="hidden" id="idUsuario" value="${usuario.id}">
                 <input id="nombreUsuario" class="swal2-input" placeholder="Nombre" value="${usuario.nombre}">
                 <input id="apellidoUsuario" class="swal2-input" placeholder="Apellido" value="${usuario.apellido}">
@@ -663,8 +670,7 @@ function mostrarFormularioEditar(usuario) {
                 <input type="password" id="passwordUsuario" class="swal2-input" placeholder="Contraseña" value="${usuario.password}">
                 <select id="rolUsuario" class="swal2-select">
                     ${selectOptions}
-                </select>
-            </form>`,
+                </select>`,
         showCancelButton: true,
         confirmButtonText: 'Guardar',
         cancelButtonText: 'Cancelar',
@@ -920,16 +926,16 @@ $(document).ready(function() {
                 data.forEach(function(plato) {
                     const tr = $('<tr>');
                     tr.append($('<td>').text(plato.id_plato));
-                    tr.append($('<td>').text(plato.plato_descripcion));
+                    tr.append($('<td>').text(plato.plato_nombre)); // Cambio aquí: Mostrar el nombre del plato en lugar de la descripción
                     tr.append($('<td>').text(plato.plato_precio));
                     tr.append($('<td>').text(plato.nombre_restaurante)); // Mostrar el nombre del restaurante
                     // Botones de edición y eliminación
                     const acciones = $('<td>');
-                    const editarBtn = $('<button>').text('Editar').click(function() {
+                    const editarBtn = $('<button>').addClass('boton-editar').text('Editar').click(function() {
                         // Mostrar Sweet Alert para editar el plato
                         mostrarEditarPlatoAlert(plato);
                     });
-                    const eliminarBtn = $('<button>').text('Eliminar').click(function() {
+                    const eliminarBtn = $('<button>').addClass('boton-eliminar').text('Eliminar').click(function() {
                         // Lógica para eliminar el plato aquí
                         eliminarPlato(plato.id_plato);
                     });
@@ -949,8 +955,10 @@ $(document).ready(function() {
         });
     }
 
-    // Llamar a cargarPlatos() al cargar la página para mostrar todos los platos por defecto
+    // Llamar a la función de carga de platos al cargar la página
     cargarPlatos();
+
+
 
     // Evento de cambio en los filtros para volver a cargar los platos según los nuevos filtros
     $('#filtroNombrePlato, #filtroPrecioMin, #filtroPrecioMax, #filtroRestaurante').on('change', function() {
@@ -1013,7 +1021,7 @@ function mostrarEditarPlatoAlert(plato) {
             Swal.fire({
                 title: 'Editar Plato',
                 html:
-                    `<input id="swal-input1" class="swal2-input" placeholder="Nombre" value="${plato.plato_descripcion}">` +
+                    `<input id="swal-input1" class="swal2-input" placeholder="Nombre" value="${plato.plato_nombre}">` +
                     `<input id="swal-input2" class="swal2-input" placeholder="Precio" value="${plato.plato_precio}">` +
                     `<select id="swal-select" class="swal2-select">${restaurantesOptions}</select>`,
                 showCancelButton: true,
@@ -1153,11 +1161,13 @@ $('#btnAgregarPlato').click(function() {
                         const precio = Swal.getPopup().querySelector('#swal-input2').value;
                         const idRestaurante = Swal.getPopup().querySelector('#swal-select-restaurantes').value;
 
-                        // Validar que el campo "Nombre" no esté vacío y contenga solo letras
-                        if (!nombre || !/^[a-zA-Z]+$/.test(nombre)) {
-                            Swal.showValidationMessage('El nombre del plato no puede estar vacío y debe contener solo letras');
-                            return false;
-                        }
+                     
+                            // Validar que el campo "Nombre" no esté vacío y contenga solo letras y espacios
+                            if (!nombre || !/^[a-zA-Z\s]+$/.test(nombre.trim())) {
+                                Swal.showValidationMessage('El nombre del plato no puede estar vacío y debe contener solo letras y espacios');
+                                return false;
+                            }
+
 
                         // Verificar si el precio es un número
                         if (!precio || isNaN(parseFloat(precio))) {

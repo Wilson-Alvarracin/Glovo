@@ -13,6 +13,7 @@
 
     <!-- Header con botones para seleccionar la sección -->
     <div>
+        <h2>DEVELOPER</h2>
     <button class="boton-seleccion" onclick="mostrarContenido('restaurantes')">Restaurantes</button>
     <button class="boton-seleccion" onclick="mostrarContenido('usuarios')">Usuarios</button>
     <button class="boton-seleccion" onclick="mostrarContenido('platos')">Platos</button>
@@ -27,11 +28,11 @@
     <h2>Restaurantes</h2>
     <!-- Formulario para filtros -->
 
-        <!-- Botón para añadir restaurante -->
-        <button onclick="mostrarFormulario()">Añadir Restaurante</button>   
-    <button onclick="crearTipoComida()">Crear tipo comida</button>  
+    <!-- Botón para añadir restaurante -->
+    <button class="boton-formato" onclick="mostrarFormulario()">Añadir Restaurante</button>
+    <button class="boton-formato" onclick="crearTipoComida()">Crear tipo comida</button>
     <br>
-    <br>    
+    <br> 
     
     <form method="GET" action="">
         <label for="nombreRestaurante">Nombre Restaurante:</label>
@@ -99,8 +100,8 @@
             echo "<td>".$row["nombre_gerente"]."</td>";
             echo "<td>".$row["tipo_cocina"]."</td>"; // Mostrar el tipo de cocina
             echo "<td>
-            <button class='boton-formato' onclick='editarRestaurante(".$row["id_restaurante"].")'>Editar</button> 
-            <button class='boton-formato' onclick='eliminarRestaurante(".$row["id_restaurante"].")'>Eliminar</button>
+            <button class='boton-editar' onclick='editarRestaurante(".$row["id_restaurante"].")'>Editar</button> 
+            <button class='boton-eliminar' onclick='eliminarRestaurante(".$row["id_restaurante"].")'>Eliminar</button>
           </td>";
     
     
@@ -118,9 +119,10 @@
     <!-- Barra de filtro -->
 
         <!-- Botón para añadir un nuevo usuario -->
-        <button id="btnAgregarUsuario">Agregar Usuario</button>
+        <button class="boton-formato-dos" id="btnAgregarUsuario">Agregar Usuario</button>
+        <br>
+        <br>
     <!-- Tabla para mostrar la lista de usuarios -->
-
 
     <form>
         <label for="filtroNombre">Filtrar por Nombre:</label>
@@ -167,7 +169,9 @@
 
 
         <!-- Botón para agregar un nuevo plato -->
-        <button id="btnAgregarPlato">Agregar Plato</button>
+        <button class="boton-formato-dos" id="btnAgregarPlato">Agregar Plato</button>
+        <br>
+        <br>
 
     <form>
         <label for="filtroNombrePlato">Filtrar por Nombre:</label>

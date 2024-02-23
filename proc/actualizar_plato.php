@@ -11,7 +11,7 @@ if (isset($_POST['id_plato'], $_POST['nombre'], $_POST['precio'], $_POST['id_res
     $id_restaurante = $_POST['id_restaurante'];
 
     // Actualizar los datos del plato en la base de datos
-    $sql = "UPDATE tbl_platos SET plato_descripcion = :nombre, plato_precio = :precio, id_restaurante = :id_restaurante WHERE id_plato = :id_plato";
+    $sql = "UPDATE tbl_platos SET plato_nombre = :nombre, plato_precio = :precio, id_restaurante = :id_restaurante WHERE id_plato = :id_plato";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':nombre', $nombre);
     $stmt->bindParam(':precio', $precio);

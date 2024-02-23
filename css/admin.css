@@ -1,4 +1,33 @@
-        /* Estilo para ocultar los divs */
+/* Estilo personalizado para los SweetAlerts */
+.swal2-popup {
+    border-radius: 10px; /* Bordes redondeados */
+}
+
+.swal2-confirm {
+    background-color: #ffc107; /* Fondo amarillo para el botón de confirmación */
+    color: #28a745; /* Letras verdes para el botón de confirmación */
+    border-radius: 20px; /* Bordes redondeados */
+}
+
+.swal2-cancel {
+    background-color: #dc3545; /* Fondo rojo para el botón de cancelación */
+    color: #fff; /* Letras blancas para el botón de cancelación */
+    border-radius: 20px; /* Bordes redondeados */
+}
+  
+
+
+header h2 {
+    color: #00a082;
+    font-family: 'Gotham', sans-serif;
+    font-size: 30px;
+}
+
+  
+  
+  
+  
+  /* Estilo para ocultar los divs */
         .hidden {
             display: none;
         }
@@ -27,6 +56,43 @@ html, body {
     color: #00a082; /* Color de texto verde */
 }
 
+/* Estilo para los botones de editar */
+.boton-editar {
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #00a082;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Estilo para el hover de los botones de editar */
+.boton-editar:hover {
+    background-color: #00845e;
+    color: #eee;
+}
+
+/* Estilo para los botones de eliminar */
+.boton-eliminar {
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #ff6347; /* Color rojo para botón de eliminar */
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Estilo para el hover de los botones de eliminar */
+.boton-eliminar:hover {
+    background-color: #cc473d; /* Color rojo más oscuro para hover */
+    color: #eee;
+}
 
 
 
@@ -49,6 +115,69 @@ html, body {
     background-color: #00845e;
     color: #eee;
 }
+
+
+
+@font-face {
+    font-family: 'Gotham';
+    src: url('../fonts/Gotham-Bold.ttf') format('truetype'), url('../fonts/Gotham-Medium.ttf') format('truetype'), url('../fonts/Gotham-Light.ttf') format('truetype');
+    /* Puedes agregar más variantes de la fuente según sea necesario */
+}
+
+
+/* CSS RESTAURANTE */
+    /* Estilo para los botones del div */
+    .boton-formato {
+        border-radius: 30px; /* Bordes redondeados */
+        padding: 15px 30px; /* Espaciado interior */
+        font-size: 18px; /* Tamaño de fuente */
+        margin: 10px; /* Margen entre botones */
+        background-color: #00a082; /* Color de fondo */
+        color: #fff; /* Color del texto */
+        border: none; /* Eliminar borde */
+        cursor: pointer; /* Cambiar cursor al pasar sobre el botón */
+        transition: background-color 0.3s, color 0.3s, box-shadow 0.3s; /* Transición suave */
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra */
+        margin-left: 220px;
+    }
+
+    /* Estilo para el hover */
+    .boton-formato:hover {
+        background-color: #00845e; /* Color de fondo al pasar el mouse */
+        color: #eee; /* Color del texto al pasar el mouse */
+        box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.4); /* Sombra más pronunciada */
+    }
+
+    /* Estilo adicional para el segundo botón */
+.boton-formato + .boton-formato {
+    margin-left: 10px; /* Ajustar margen izquierdo para el segundo botón */
+}
+
+    /* Estilo para centrar el h2 */
+    #restaurantes h2{
+        font-size: 50px;
+        text-align: left;
+        font-weight: bold;
+        padding-left: 230px;
+        font-family: 'Gotham', sans-serif;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -81,14 +210,6 @@ button {
 }
 
 
-
-/* Estilo para los botones específicos */
-#btnAgregarRestaurante,
-#btnCrearTipoComida {
-    border-radius: 8px; /* Bordes redondos */
-    padding: 10px 20px; /* Espaciado interior */
-    font-size: 16px; /* Tamaño de la fuente */
-}
 
 
 
@@ -184,8 +305,7 @@ form select {
 }
 
 /* Estilo para los botones de filtrado y agregar */
-#btnAgregarUsuario,
-#btnAgregarPlato,
+
 button[type="submit"] {
     margin: 5px; /* Margen entre elementos */
     padding: 10px 20px; /* Espaciado interior */
@@ -194,8 +314,7 @@ button[type="submit"] {
 }
 
 /* Estilo para los botones de filtrado y agregar cuando se presionan */
-#btnAgregarUsuario:active,
-#btnAgregarPlato:active,
+
 button[type="submit"]:active {
     background-color: green; /* Color de fondo cuando se pulsa */
     color: white; /* Color del texto */
@@ -232,3 +351,84 @@ div > div > input[type="number"],
 div > div > select {
     margin: 5px; /* Margen entre elementos */
 }
+
+
+
+
+
+
+
+
+
+
+/* Estilos para tabla USUARIOS */
+
+    /* Estilo para centrar el h2 */
+    #usuarios h2{
+        font-size: 50px;
+        text-align: left;
+        font-weight: bold;
+        padding-left: 230px;
+        font-family: 'Gotham', sans-serif;
+    }
+
+    .boton-formato-dos {
+        border-radius: 40px; /* Bordes redondeados */
+        padding: 15px 30px; /* Espaciado interior */
+        font-size: 18px; /* Tamaño de fuente */
+        margin: 10px; /* Margen entre botones */
+        background-color: #00a082; /* Color de fondo */
+        color: #fff; /* Color del texto */
+        border: none; /* Eliminar borde */
+        cursor: pointer; /* Cambiar cursor al pasar sobre el botón */
+        transition: background-color 0.3s, color 0.3s, box-shadow 0.3s; /* Transición suave */
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra */
+        margin-left: 220px;
+        font-weight: bold;
+    }
+
+    /* Estilo para el hover */
+    .boton-formato-dos:hover {
+        background-color: #00845e; /* Color de fondo al pasar el mouse */
+        color: #eee; /* Color del texto al pasar el mouse */
+        box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.4); /* Sombra más pronunciada */
+        font-weight: bold;
+    }
+
+
+/* Estilos para tabla PLATOS */
+
+    /* Estilo para centrar el h2 */
+    #platos h2{
+        font-size: 50px;
+        text-align: left;
+        font-weight: bold;
+        padding-left: 230px;
+        font-family: 'Gotham', sans-serif;
+    }
+
+
+    #platos select {
+        background-color: #ffc244;
+        font-size: 20px;
+        font-weight: bold;
+        color: #00a082;
+        border: none; /* Eliminar borde */
+        border-radius: 5px; /* Bordes redondeados */
+        padding: 8px 12px; /* Espaciado interior */
+        margin: 5px 0; /* Margen superior e inferior */
+        box-sizing: border-box; /* Incluir padding y border en el ancho total */
+    }
+    
+    #usuarios select {
+        background-color: #ffc244;
+        font-size: 20px;
+        font-weight: bold;
+        color: #00a082;
+        border: none; /* Eliminar borde */
+        border-radius: 5px; /* Bordes redondeados */
+        padding: 8px 12px; /* Espaciado interior */
+        margin: 5px 0; /* Margen superior e inferior */
+        box-sizing: border-box; /* Incluir padding y border en el ancho total */
+    }
+    

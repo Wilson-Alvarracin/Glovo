@@ -1,35 +1,38 @@
 <?php
 require_once 'conexion.php';
+
 $idUsuario = $_POST['id'];
 
 try {
     // Iniciar una transacción
     $conn->beginTransaction();
 
-    // Obtener los IDs de los restaurantes asociados al usuario
-    $sqlSelectRestaurantes = "SELECT id_restaurante FROM tbl_restaurante WHERE id_usr_gerente = :idUsuario";
-    $stmtSelectRestaurantes = $conn->prepare($sqlSelectRestaurantes);
-    $stmtSelectRestaurantes->bindParam(':idUsuario', $idUsuario);
-    $stmtSelectRestaurantes->execute();
-    $restaurantes = $stmtSelectRestaurantes->fetchAll(PDO::FETCH_ASSOC);
+    // Obtener los ID de los restaurantes asociados al usuario
+    $sqlRestaurantesUsuario = "SELECT id_restaurante FROM tbl_restaurante WHERE id_usr_gerente = :idUsuario";
+    $stmtRestaurantesUsuario = $conn->prepare($sqlRestaurantesUsuario);
+    $stmtRestaurantesUsuario->bindParam(':idUsuario', $idUsuario);
+    $stmtRestaurantesUsuario->execute();
+    $restaurantesUsuario = $stmtRestaurantesUsuario->fetchAll(PDO::FETCH_COLUMN);
 
-    // Eliminar las filas de la tabla tbl_restu_cocina asociadas a cada restaurante
-    foreach ($restaurantes as $restaurante) {
-        $idRestaurante = $restaurante['id_restaurante'];
-        $sqlDeleteCocina = "DELETE FROM tbl_restu_cocina WHERE id_restaurante = :idRestaurante";
-        $stmtDeleteCocina = $conn->prepare($sqlDeleteCocina);
-        $stmtDeleteCocina->bindParam(':idRestaurante', $idRestaurante);
-        $stmtDeleteCocina->execute();
+    // Eliminar las valoraciones asociadas al usuario
+    $sqlDeleteValoracionesUsuario = "DELETE FROM tbl_valoracion WHERE id_usr = :idUsuario";
+    $stmtDeleteValoracionesUsuario = $conn->prepare($sqlDeleteValoracionesUsuario);
+    $stmtDeleteValoracionesUsuario->bindParam(':idUsuario', $idUsuario);
+    $stmtDeleteValoracionesUsuario->execute();
+
+    // Eliminar las valoraciones asociadas a los restaurantes del usuario
+    foreach ($restaurantesUsuario as $idRestaurante) {
+        $sqlDeleteValoracionesRestaurante = "DELETE FROM tbl_valoracion WHERE id_rest = :idRestaurante";
+        $stmtDeleteValoracionesRestaurante = $conn->prepare($sqlDeleteValoracionesRestaurante);
+        $stmtDeleteValoracionesRestaurante->bindParam(':idRestaurante', $idRestaurante);
+        $stmtDeleteValoracionesRestaurante->execute();
     }
 
-    // Luego, eliminar las filas de la tabla tbl_platos asociadas a cada restaurante
-    foreach ($restaurantes as $restaurante) {
-        $idRestaurante = $restaurante['id_restaurante'];
-        $sqlDeletePlatos = "DELETE FROM tbl_platos WHERE id_restaurante = :idRestaurante";
-        $stmtDeletePlatos = $conn->prepare($sqlDeletePlatos);
-        $stmtDeletePlatos->bindParam(':idRestaurante', $idRestaurante);
-        $stmtDeletePlatos->execute();
-    }
+    // Luego, eliminar los registros de tbl_restu_cocina asociados a los restaurantes del usuario
+    $sqlDeleteRestuCocina = "DELETE rc FROM tbl_restu_cocina rc JOIN tbl_restaurante r ON rc.id_restaurante = r.id_restaurante WHERE r.id_usr_gerente = :idUsuario";
+    $stmtDeleteRestuCocina = $conn->prepare($sqlDeleteRestuCocina);
+    $stmtDeleteRestuCocina->bindParam(':idUsuario', $idUsuario);
+    $stmtDeleteRestuCocina->execute();
 
     // Luego, eliminar los restaurantes asociados al usuario
     $sqlDeleteRestaurantes = "DELETE FROM tbl_restaurante WHERE id_usr_gerente = :idUsuario";

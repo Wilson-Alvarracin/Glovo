@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Ejemplo usando PDO (usando la conexión existente)
     try {
         // Preparar la consulta para insertar un nuevo plato
-        $stmt = $conn->prepare('INSERT INTO tbl_platos (plato_descripcion, plato_precio, id_restaurante) VALUES (:nombre, :precio, :idRestaurante)');
+        $stmt = $conn->prepare('INSERT INTO tbl_platos (plato_nombre, plato_precio, id_restaurante) VALUES (:nombre, :precio, :idRestaurante)');
         // Ejecutar la consulta con los datos recibidos
         $stmt->execute(array(
             ':nombre' => $nombre,

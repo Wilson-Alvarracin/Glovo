@@ -2,7 +2,7 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'vendor/autoload.php'; // Asegúrate de que la ruta sea correcta según tu configuración
+require './vendor/autoload.php'; // Asegúrate de que la ruta sea correcta según tu configuración
 
 // Verifica si se recibió el destinatario del correo electrónico
 if(isset($_POST['destinatario'])) {
