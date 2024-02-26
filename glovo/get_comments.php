@@ -1,3 +1,4 @@
+
 <?php
 // Establecer conexión a la base de datos (reemplaza con tus credenciales)
 $servername = "localhost";
@@ -29,13 +30,14 @@ if ($result) {
     if ($result->num_rows > 0) {
         // Inicializar el contenido
         $contenido = '';
-
         while ($row = $result->fetch_assoc()) {
             // Concatenar cada valoración al contenido
-            $contenido .= '<p>';
-            $contenido .= 'Nombre usuario: '.$row['usr_nom'].' <br>';
-            $contenido .= 'Estrellas: '.$row['valoracion'].' <br>';
+            $contenido .= '<div class="icon-comment row1">';
+            $contenido .= '<img src="../img/icon.png" alt="">';
+            $contenido .= '</div>';
+            $contenido .= '<h4 class="name-comment">'.$row['usr_nom'].' - '.$row['valoracion'].'/5</h4><br>';
             $contenido .= $row['comentario'];
+            $contenido .= '';
 
             // Agregar botón de borrar si el usuario actual es el que hizo la valoración
             // if (isset($_SESSION['id_user']) && $_SESSION['id_user'] == $row['user_id']) {

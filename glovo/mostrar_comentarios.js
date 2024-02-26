@@ -1,11 +1,11 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function() {
     function updateComments() {
         // Obtener el ID del restaurante desde el input oculto
         var restaurantId = document.getElementById('id_restaurante').value;
 
         // Hacer una petición AJAX para obtener comentarios del servidor
         var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
+        xhr.onreadystatechange = function() {
             if (xhr.readyState == 4) {
                 if (xhr.status == 200) {
                     // Parsear la respuesta JSON
@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     // Mostrar la tabla en el div con id 'comentarios_all'
                     var commentsDiv = document.getElementById('comentarios_all');
-                    commentsDiv.innerHTML = response.contenido || '';
+                    commentsDiv.innerHTML = '<div class="contenido-pagina">' + response.contenido + '</div>' || '';
 
                     // Si hay un mensaje, mostrarlo
                     if (response.message) {

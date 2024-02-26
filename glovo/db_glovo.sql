@@ -38,7 +38,8 @@ CREATE TABLE IF NOT EXISTS `tbl_restaurante` (
 CREATE TABLE IF NOT EXISTS `tbl_platos` (
   `id_plato` int NOT NULL AUTO_INCREMENT,
   `plato_precio` int DEFAULT NULL,
-  `plato_descripcion` varchar(45) DEFAULT NULL,
+  `plato_nombre` varchar(45) DEFAULT NULL,
+  `plato_descripcion` varchar(255) DEFAULT NULL,
   `id_restaurante` int NOT NULL,
   `plato_imagen` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_plato`),

@@ -43,6 +43,7 @@ if ($product_result) { // Check if the query was successful
     if ($product_result->num_rows > 0) {
         while ($product = $product_result->fetch_assoc()) {
             $output['products'][] = [
+                'plato_nombre' => $product['plato_nombre'],
                 'plato_descripcion' => $product['plato_descripcion'],
                 'plato_precio' => $product['plato_precio'],
                 'plato_imagen' => $product['plato_imagen'],
